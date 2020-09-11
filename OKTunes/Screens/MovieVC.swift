@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MovieVC.swift
 //  OKTunes
 //
 //  Created by Önder Koşar on 11.09.2020.
@@ -8,13 +8,17 @@
 
 import UIKit
 
-class ViewController: UIViewController {
 
+class MovieVC: UIViewController {
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .systemOrange
+        
+        
     }
-
-
+    
+    
+    
 }
-

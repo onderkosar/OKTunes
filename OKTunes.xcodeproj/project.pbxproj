@@ -8,20 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		955EDB72250BAEBB0079599E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB71250BAEBB0079599E /* AppDelegate.swift */; };
-		955EDB74250BAEBB0079599E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB73250BAEBB0079599E /* SceneDelegate.swift */; };
-		955EDB76250BAEBB0079599E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB75250BAEBB0079599E /* ViewController.swift */; };
 		955EDB7B250BAEBD0079599E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 955EDB7A250BAEBD0079599E /* Assets.xcassets */; };
 		955EDB7E250BAEBD0079599E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 955EDB7C250BAEBD0079599E /* LaunchScreen.storyboard */; };
+		955EDB8D250BB44E0079599E /* OKTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB8C250BB44E0079599E /* OKTabBarController.swift */; };
+		955EDB8F250BB4710079599E /* MusicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB8E250BB4710079599E /* MusicVC.swift */; };
+		955EDB91250BB4800079599E /* MovieVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB90250BB4800079599E /* MovieVC.swift */; };
+		955EDB93250BB53D0079599E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB92250BB53D0079599E /* Constants.swift */; };
+		955EDB95250BD09B0079599E /* PodcastVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB94250BD09B0079599E /* PodcastVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		955EDB6E250BAEBB0079599E /* OKTunes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OKTunes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		955EDB71250BAEBB0079599E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		955EDB73250BAEBB0079599E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		955EDB75250BAEBB0079599E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		955EDB7A250BAEBD0079599E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		955EDB7D250BAEBD0079599E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		955EDB7F250BAEBD0079599E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		955EDB8C250BB44E0079599E /* OKTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKTabBarController.swift; sourceTree = "<group>"; };
+		955EDB8E250BB4710079599E /* MusicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicVC.swift; sourceTree = "<group>"; };
+		955EDB90250BB4800079599E /* MovieVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieVC.swift; sourceTree = "<group>"; };
+		955EDB92250BB53D0079599E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		955EDB94250BD09B0079599E /* PodcastVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +60,73 @@
 		955EDB70250BAEBB0079599E /* OKTunes */ = {
 			isa = PBXGroup;
 			children = (
-				955EDB71250BAEBB0079599E /* AppDelegate.swift */,
-				955EDB73250BAEBB0079599E /* SceneDelegate.swift */,
-				955EDB75250BAEBB0079599E /* ViewController.swift */,
-				955EDB7A250BAEBD0079599E /* Assets.xcassets */,
-				955EDB7C250BAEBD0079599E /* LaunchScreen.storyboard */,
+				955EDB8B250BB41B0079599E /* Extensions */,
+				955EDB8A250BB4160079599E /* Utilities */,
+				955EDB89250BB4080079599E /* Managers */,
+				955EDB88250BB3F50079599E /* Models */,
+				955EDB87250BB3CA0079599E /* CustomViews */,
+				955EDB86250BB3C10079599E /* Screens */,
+				955EDB85250BB3A00079599E /* Support */,
 				955EDB7F250BAEBD0079599E /* Info.plist */,
 			);
 			path = OKTunes;
+			sourceTree = "<group>";
+		};
+		955EDB85250BB3A00079599E /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				955EDB71250BAEBB0079599E /* AppDelegate.swift */,
+				955EDB7A250BAEBD0079599E /* Assets.xcassets */,
+				955EDB7C250BAEBD0079599E /* LaunchScreen.storyboard */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		955EDB86250BB3C10079599E /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				955EDB8E250BB4710079599E /* MusicVC.swift */,
+				955EDB90250BB4800079599E /* MovieVC.swift */,
+				955EDB94250BD09B0079599E /* PodcastVC.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		955EDB87250BB3CA0079599E /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				955EDB8C250BB44E0079599E /* OKTabBarController.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		955EDB88250BB3F50079599E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		955EDB89250BB4080079599E /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		955EDB8A250BB4160079599E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				955EDB92250BB53D0079599E /* Constants.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		955EDB8B250BB41B0079599E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,9 +199,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				955EDB76250BAEBB0079599E /* ViewController.swift in Sources */,
+				955EDB8F250BB4710079599E /* MusicVC.swift in Sources */,
+				955EDB95250BD09B0079599E /* PodcastVC.swift in Sources */,
+				955EDB8D250BB44E0079599E /* OKTabBarController.swift in Sources */,
+				955EDB91250BB4800079599E /* MovieVC.swift in Sources */,
+				955EDB93250BB53D0079599E /* Constants.swift in Sources */,
 				955EDB72250BAEBB0079599E /* AppDelegate.swift in Sources */,
-				955EDB74250BAEBB0079599E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,7 +272,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -258,7 +326,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -275,6 +343,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7HRBP97NH3;
 				INFOPLIST_FILE = OKTunes/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -293,6 +362,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7HRBP97NH3;
 				INFOPLIST_FILE = OKTunes/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
