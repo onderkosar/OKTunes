@@ -15,6 +15,14 @@
 		955EDB91250BB4800079599E /* MovieVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB90250BB4800079599E /* MovieVC.swift */; };
 		955EDB93250BB53D0079599E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB92250BB53D0079599E /* Constants.swift */; };
 		955EDB95250BD09B0079599E /* PodcastVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB94250BD09B0079599E /* PodcastVC.swift */; };
+		955EDB98250BD8B30079599E /* OKDataLoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB97250BD8B30079599E /* OKDataLoadingVC.swift */; };
+		955EDB9B250BDF960079599E /* MusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB9A250BDF960079599E /* MusicCell.swift */; };
+		955EDB9D250BE5190079599E /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB9C250BE5190079599E /* UIView+Ext.swift */; };
+		955EDB9F250BEAAA0079599E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB9E250BEAAA0079599E /* NetworkManager.swift */; };
+		955EDBA1250BEB180079599E /* Musics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDBA0250BEB180079599E /* Musics.swift */; };
+		955EDBA4250C23CF0079599E /* OKImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDBA3250C23CF0079599E /* OKImageView.swift */; };
+		955EDBA7250C29460079599E /* OKTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDBA6250C29460079599E /* OKTitleLabel.swift */; };
+		955EDBA9250C2B070079599E /* OKSecondaryTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDBA8250C2B070079599E /* OKSecondaryTitleLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +36,14 @@
 		955EDB90250BB4800079599E /* MovieVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieVC.swift; sourceTree = "<group>"; };
 		955EDB92250BB53D0079599E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		955EDB94250BD09B0079599E /* PodcastVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastVC.swift; sourceTree = "<group>"; };
+		955EDB97250BD8B30079599E /* OKDataLoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKDataLoadingVC.swift; sourceTree = "<group>"; };
+		955EDB9A250BDF960079599E /* MusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicCell.swift; sourceTree = "<group>"; };
+		955EDB9C250BE5190079599E /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		955EDB9E250BEAAA0079599E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		955EDBA0250BEB180079599E /* Musics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Musics.swift; sourceTree = "<group>"; };
+		955EDBA3250C23CF0079599E /* OKImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKImageView.swift; sourceTree = "<group>"; };
+		955EDBA6250C29460079599E /* OKTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKTitleLabel.swift; sourceTree = "<group>"; };
+		955EDBA8250C2B070079599E /* OKSecondaryTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKSecondaryTitleLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +111,10 @@
 		955EDB87250BB3CA0079599E /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				955EDBA5250C29280079599E /* Labels */,
+				955EDBA2250C23B10079599E /* ImageViews */,
+				955EDB99250BDF870079599E /* Cells */,
+				955EDB96250BD8970079599E /* ViewControllers */,
 				955EDB8C250BB44E0079599E /* OKTabBarController.swift */,
 			);
 			path = CustomViews;
@@ -103,6 +123,7 @@
 		955EDB88250BB3F50079599E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				955EDBA0250BEB180079599E /* Musics.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -110,6 +131,7 @@
 		955EDB89250BB4080079599E /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				955EDB9E250BEAAA0079599E /* NetworkManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -125,8 +147,42 @@
 		955EDB8B250BB41B0079599E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				955EDB9C250BE5190079599E /* UIView+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		955EDB96250BD8970079599E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				955EDB97250BD8B30079599E /* OKDataLoadingVC.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		955EDB99250BDF870079599E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				955EDB9A250BDF960079599E /* MusicCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		955EDBA2250C23B10079599E /* ImageViews */ = {
+			isa = PBXGroup;
+			children = (
+				955EDBA3250C23CF0079599E /* OKImageView.swift */,
+			);
+			path = ImageViews;
+			sourceTree = "<group>";
+		};
+		955EDBA5250C29280079599E /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				955EDBA6250C29460079599E /* OKTitleLabel.swift */,
+				955EDBA8250C2B070079599E /* OKSecondaryTitleLabel.swift */,
+			);
+			path = Labels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,9 +255,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				955EDBA4250C23CF0079599E /* OKImageView.swift in Sources */,
 				955EDB8F250BB4710079599E /* MusicVC.swift in Sources */,
 				955EDB95250BD09B0079599E /* PodcastVC.swift in Sources */,
+				955EDB9F250BEAAA0079599E /* NetworkManager.swift in Sources */,
+				955EDB98250BD8B30079599E /* OKDataLoadingVC.swift in Sources */,
+				955EDB9B250BDF960079599E /* MusicCell.swift in Sources */,
+				955EDBA7250C29460079599E /* OKTitleLabel.swift in Sources */,
 				955EDB8D250BB44E0079599E /* OKTabBarController.swift in Sources */,
+				955EDBA9250C2B070079599E /* OKSecondaryTitleLabel.swift in Sources */,
+				955EDBA1250BEB180079599E /* Musics.swift in Sources */,
+				955EDB9D250BE5190079599E /* UIView+Ext.swift in Sources */,
 				955EDB91250BB4800079599E /* MovieVC.swift in Sources */,
 				955EDB93250BB53D0079599E /* Constants.swift in Sources */,
 				955EDB72250BAEBB0079599E /* AppDelegate.swift in Sources */,

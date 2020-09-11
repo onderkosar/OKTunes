@@ -9,7 +9,7 @@
 import UIKit
 
 
-class PodcastVC: UIViewController {
+class PodcastVC: OKDataLoadingVC {
     
     
     override func viewDidLoad() {

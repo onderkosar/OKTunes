@@ -9,7 +9,7 @@
 import UIKit
 
 
-class MovieVC: UIViewController {
+class MovieVC: OKDataLoadingVC {
     
     
     override func viewDidLoad() {
