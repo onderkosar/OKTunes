@@ -66,4 +66,10 @@ extension MovieVC: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.set(with: resultsArray[indexPath.row])
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let destinationVC = ItemInfoVC()
+        destinationVC.set(with: resultsArray[indexPath.row])
+        present(destinationVC, animated: true, completion: nil)
+    }
 }

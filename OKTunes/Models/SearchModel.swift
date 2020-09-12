@@ -20,6 +20,7 @@ struct Results: Codable, Hashable {
     let artworkUrl100: String
     let releaseDate: String
     let primaryGenreName: String
+    let longDescription: String?
     
     var date: String {
         return releaseDate.convertToDisplayFormat()

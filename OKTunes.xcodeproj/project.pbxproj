@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9507856D250D5D0A006D9A0A /* ItemInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9507856C250D5D0A006D9A0A /* ItemInfoVC.swift */; };
 		955255A5250CED7F00C8A558 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955255A4250CED7F00C8A558 /* MovieCell.swift */; };
 		955255A9250CF0B800C8A558 /* DataType+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955255A8250CF0B800C8A558 /* DataType+Ext.swift */; };
 		955255AB250CF80400C8A558 /* PodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955255AA250CF80400C8A558 /* PodcastCell.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9507856C250D5D0A006D9A0A /* ItemInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInfoVC.swift; sourceTree = "<group>"; };
 		955255A4250CED7F00C8A558 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		955255A8250CF0B800C8A558 /* DataType+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataType+Ext.swift"; sourceTree = "<group>"; };
 		955255AA250CF80400C8A558 /* PodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCell.swift; sourceTree = "<group>"; };
@@ -108,8 +110,9 @@
 			isa = PBXGroup;
 			children = (
 				955EDB8E250BB4710079599E /* MusicVC.swift */,
-				955EDB90250BB4800079599E /* MovieVC.swift */,
 				955EDB94250BD09B0079599E /* PodcastVC.swift */,
+				955EDB90250BB4800079599E /* MovieVC.swift */,
+				9507856C250D5D0A006D9A0A /* ItemInfoVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				955EDBA4250C23CF0079599E /* OKImageView.swift in Sources */,
 				955EDB8F250BB4710079599E /* MusicVC.swift in Sources */,
 				955EDB95250BD09B0079599E /* PodcastVC.swift in Sources */,
+				9507856D250D5D0A006D9A0A /* ItemInfoVC.swift in Sources */,
 				955255AB250CF80400C8A558 /* PodcastCell.swift in Sources */,
 				955EDB9F250BEAAA0079599E /* NetworkManager.swift in Sources */,
 				955EDB98250BD8B30079599E /* OKDataLoadingVC.swift in Sources */,

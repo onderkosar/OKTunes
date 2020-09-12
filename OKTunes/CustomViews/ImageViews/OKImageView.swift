@@ -9,7 +9,6 @@
 import UIKit
 
 class OKImageView: UIImageView {
-//    let placeholderImage    = Images.moviePlaceholder
     
     
     override init(frame: CGRect) {
@@ -32,7 +31,6 @@ class OKImageView: UIImageView {
         
         layer.cornerRadius  = 10
         clipsToBounds       = true
-//        image               = placeholderImage
         tintColor           = .systemGray
     }
     
