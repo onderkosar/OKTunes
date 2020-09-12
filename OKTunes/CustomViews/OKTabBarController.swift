@@ -15,7 +15,7 @@ class OKTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         UITabBar.appearance().tintColor     = .systemOrange
-        viewControllers                     = [createMusicNC(), createMovieNC(), createPodcastNC()]
+        viewControllers                     = [createMusicNC(), createPodcastNC(), createMovieNC()]
     }
     
     
@@ -27,19 +27,19 @@ class OKTabBarController: UITabBarController {
         return UINavigationController(rootViewController: musicVC)
     }
     
-    func createMovieNC() -> UINavigationController {
-        let movieVC = MovieVC()
-        movieVC.title           = "Top Movies"
-        movieVC.tabBarItem      = UITabBarItem(title: "Movies", image: SFSymbols.movie, tag: 1)
-        
-        return UINavigationController(rootViewController: movieVC)
-    }
-    
     func createPodcastNC() -> UINavigationController {
         let podcastVC           = PodcastVC()
         podcastVC.title         = "Top Podcasts"
-        podcastVC.tabBarItem    = UITabBarItem(title: "Podcasts", image: SFSymbols.podcast, tag: 2)
+        podcastVC.tabBarItem    = UITabBarItem(title: "Podcasts", image: SFSymbols.podcast, tag: 1)
         
         return UINavigationController(rootViewController: podcastVC)
+    }
+    
+    func createMovieNC() -> UINavigationController {
+        let movieVC = MovieVC()
+        movieVC.title           = "Top Movies"
+        movieVC.tabBarItem      = UITabBarItem(title: "Movies", image: SFSymbols.movie, tag: 2)
+        
+        return UINavigationController(rootViewController: movieVC)
     }
 }

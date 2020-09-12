@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Musics: Codable, Hashable {
+struct SearchModel: Codable, Hashable {
     let resultCount: Int
     let results: [Results]
 }
@@ -16,11 +16,12 @@ struct Musics: Codable, Hashable {
 struct Results: Codable, Hashable {
     let artistId, collectionId, trackId: Int?
     let artistName, collectionName, trackName: String?
-    let previewUrl: String
+    let previewUrl: String?
     let artworkUrl100: String
-    let collectionPrice, trackPrice: Double
     let releaseDate: String
-    let trackTimeMillis: Int
     let primaryGenreName: String
-    let contentAdvisoryRating: String?
+    
+    var date: String {
+        return releaseDate.convertToDisplayFormat()
+    }
 }

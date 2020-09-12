@@ -1,19 +1,19 @@
 //
-//  MusicCell.swift
+//  PodcastCell.swift
 //  OKTunes
 //
-//  Created by Önder Koşar on 11.09.2020.
+//  Created by Önder Koşar on 12.09.2020.
 //  Copyright © 2020 Önder Koşar. All rights reserved.
 //
 
 import UIKit
 
-class MusicCell: UICollectionViewCell {
-    static let reuseID  = "musicCell"
+class PodcastCell: UICollectionViewCell {
+    static let reuseID  = "podcastCell"
     
     let artworkImgView  = OKImageView(content: .scaleAspectFit)
     let trackLbl        = OKTitleLabel(textAlignment: .left, fontSize: 20)
-    let albumLbl        = OKSecondaryTitleLabel(fontSize: 18)
+    let genrdeLbl       = OKSecondaryTitleLabel(fontSize: 18)
     let artistLbl       = OKSecondaryTitleLabel(fontSize: 15)
     
     override init(frame: CGRect) {
@@ -28,16 +28,16 @@ class MusicCell: UICollectionViewCell {
     
     func set(with result: Results) {
         trackLbl.text   = result.trackName
-        albumLbl.text   = result.collectionName
+        genrdeLbl.text  = result.primaryGenreName
         artistLbl.text  = result.artistName
         artworkImgView.downloadImage(fromURL: URL(string: result.artworkUrl100)!)
     }
     
     private func configure() {
-        addSubviews(artworkImgView, trackLbl, albumLbl, artistLbl)
+        addSubviews(artworkImgView, trackLbl, genrdeLbl, artistLbl)
         artworkImgView.backgroundColor  = .black
         trackLbl.backgroundColor        = .clear
-        albumLbl.backgroundColor        = .clear
+        genrdeLbl.backgroundColor       = .clear
         artistLbl.backgroundColor       = .clear
         artistLbl.alpha                 = 0.7
         
@@ -55,10 +55,10 @@ class MusicCell: UICollectionViewCell {
             trackLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             trackLbl.heightAnchor.constraint(equalToConstant: 22),
             
-            albumLbl.topAnchor.constraint(equalTo: trackLbl.bottomAnchor, constant: 2),
-            albumLbl.leadingAnchor.constraint(equalTo: artworkImgView.trailingAnchor, constant: 10),
-            albumLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            albumLbl.heightAnchor.constraint(equalToConstant: 20),
+            genrdeLbl.topAnchor.constraint(equalTo: trackLbl.bottomAnchor, constant: 2),
+            genrdeLbl.leadingAnchor.constraint(equalTo: artworkImgView.trailingAnchor, constant: 10),
+            genrdeLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            genrdeLbl.heightAnchor.constraint(equalToConstant: 20),
             
             artistLbl.bottomAnchor.constraint(equalTo: artworkImgView.bottomAnchor, constant: -2),
             artistLbl.leadingAnchor.constraint(equalTo: artworkImgView.trailingAnchor, constant: 10),

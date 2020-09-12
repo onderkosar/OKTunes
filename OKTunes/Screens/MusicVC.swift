@@ -35,7 +35,7 @@ class MusicVC: OKDataLoadingVC {
     
     func getItunes() {
         showLoadingView()
-        NetworkManager.shared.fetch(from: URLStrings.movies) { (musics: Musics) in
+        NetworkManager.shared.fetch(from: URLStrings.musics) { (musics: SearchModel) in
             self.dismissLoadingView()
             self.updateUI(with: musics.results)
         }
@@ -47,7 +47,6 @@ class MusicVC: OKDataLoadingVC {
             self.musicsCollectionView.reloadData()
         }
     }
-    
 }
 
 extension MusicVC: UICollectionViewDelegateFlowLayout {

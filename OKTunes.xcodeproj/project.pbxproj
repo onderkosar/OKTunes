@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		955255A5250CED7F00C8A558 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955255A4250CED7F00C8A558 /* MovieCell.swift */; };
+		955255A9250CF0B800C8A558 /* DataType+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955255A8250CF0B800C8A558 /* DataType+Ext.swift */; };
+		955255AB250CF80400C8A558 /* PodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955255AA250CF80400C8A558 /* PodcastCell.swift */; };
 		955EDB72250BAEBB0079599E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB71250BAEBB0079599E /* AppDelegate.swift */; };
 		955EDB7B250BAEBD0079599E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 955EDB7A250BAEBD0079599E /* Assets.xcassets */; };
 		955EDB7E250BAEBD0079599E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 955EDB7C250BAEBD0079599E /* LaunchScreen.storyboard */; };
@@ -19,13 +22,16 @@
 		955EDB9B250BDF960079599E /* MusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB9A250BDF960079599E /* MusicCell.swift */; };
 		955EDB9D250BE5190079599E /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB9C250BE5190079599E /* UIView+Ext.swift */; };
 		955EDB9F250BEAAA0079599E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB9E250BEAAA0079599E /* NetworkManager.swift */; };
-		955EDBA1250BEB180079599E /* Musics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDBA0250BEB180079599E /* Musics.swift */; };
+		955EDBA1250BEB180079599E /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDBA0250BEB180079599E /* SearchModel.swift */; };
 		955EDBA4250C23CF0079599E /* OKImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDBA3250C23CF0079599E /* OKImageView.swift */; };
 		955EDBA7250C29460079599E /* OKTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDBA6250C29460079599E /* OKTitleLabel.swift */; };
 		955EDBA9250C2B070079599E /* OKSecondaryTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDBA8250C2B070079599E /* OKSecondaryTitleLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		955255A4250CED7F00C8A558 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		955255A8250CF0B800C8A558 /* DataType+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataType+Ext.swift"; sourceTree = "<group>"; };
+		955255AA250CF80400C8A558 /* PodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCell.swift; sourceTree = "<group>"; };
 		955EDB6E250BAEBB0079599E /* OKTunes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OKTunes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		955EDB71250BAEBB0079599E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		955EDB7A250BAEBD0079599E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -40,7 +46,7 @@
 		955EDB9A250BDF960079599E /* MusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicCell.swift; sourceTree = "<group>"; };
 		955EDB9C250BE5190079599E /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		955EDB9E250BEAAA0079599E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		955EDBA0250BEB180079599E /* Musics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Musics.swift; sourceTree = "<group>"; };
+		955EDBA0250BEB180079599E /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		955EDBA3250C23CF0079599E /* OKImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKImageView.swift; sourceTree = "<group>"; };
 		955EDBA6250C29460079599E /* OKTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKTitleLabel.swift; sourceTree = "<group>"; };
 		955EDBA8250C2B070079599E /* OKSecondaryTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKSecondaryTitleLabel.swift; sourceTree = "<group>"; };
@@ -123,7 +129,7 @@
 		955EDB88250BB3F50079599E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				955EDBA0250BEB180079599E /* Musics.swift */,
+				955EDBA0250BEB180079599E /* SearchModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -148,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				955EDB9C250BE5190079599E /* UIView+Ext.swift */,
+				955255A8250CF0B800C8A558 /* DataType+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -164,6 +171,8 @@
 			isa = PBXGroup;
 			children = (
 				955EDB9A250BDF960079599E /* MusicCell.swift */,
+				955255AA250CF80400C8A558 /* PodcastCell.swift */,
+				955255A4250CED7F00C8A558 /* MovieCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -258,13 +267,16 @@
 				955EDBA4250C23CF0079599E /* OKImageView.swift in Sources */,
 				955EDB8F250BB4710079599E /* MusicVC.swift in Sources */,
 				955EDB95250BD09B0079599E /* PodcastVC.swift in Sources */,
+				955255AB250CF80400C8A558 /* PodcastCell.swift in Sources */,
 				955EDB9F250BEAAA0079599E /* NetworkManager.swift in Sources */,
 				955EDB98250BD8B30079599E /* OKDataLoadingVC.swift in Sources */,
+				955255A9250CF0B800C8A558 /* DataType+Ext.swift in Sources */,
 				955EDB9B250BDF960079599E /* MusicCell.swift in Sources */,
 				955EDBA7250C29460079599E /* OKTitleLabel.swift in Sources */,
 				955EDB8D250BB44E0079599E /* OKTabBarController.swift in Sources */,
+				955255A5250CED7F00C8A558 /* MovieCell.swift in Sources */,
 				955EDBA9250C2B070079599E /* OKSecondaryTitleLabel.swift in Sources */,
-				955EDBA1250BEB180079599E /* Musics.swift in Sources */,
+				955EDBA1250BEB180079599E /* SearchModel.swift in Sources */,
 				955EDB9D250BE5190079599E /* UIView+Ext.swift in Sources */,
 				955EDB91250BB4800079599E /* MovieVC.swift in Sources */,
 				955EDB93250BB53D0079599E /* Constants.swift in Sources */,

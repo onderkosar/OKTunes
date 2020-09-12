@@ -10,15 +10,60 @@ import UIKit
 
 
 class MovieVC: OKDataLoadingVC {
+    var moviesCollectionView: UICollectionView!
+    var resultsArray: [Results] = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemOrange
-        
-        
+        configureCollectionView()
+        getItunes()
     }
     
     
+    func configureCollectionView() {
+        moviesCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
+        moviesCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseID)
+        moviesCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        moviesCollectionView.delegate         = self
+        moviesCollectionView.dataSource       = self
+        moviesCollectionView.backgroundColor  = .darkGray
+        
+        view.addSubview(moviesCollectionView)
+    }
     
+    func getItunes() {
+        showLoadingView()
+        NetworkManager.shared.fetch(from: URLStrings.movies) { (movies: SearchModel) in
+            self.dismissLoadingView()
+            self.updateUI(with: movies.results)
+        }
+    }
+    
+    func updateUI(with resultsArray : [Results]) {
+        self.resultsArray.append(contentsOf: resultsArray)
+        DispatchQueue.main.async {
+            self.moviesCollectionView.reloadData()
+        }
+    }
+}
+
+extension MovieVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 110)
+    }
+}
+
+extension MovieVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return resultsArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseID, for: indexPath) as! MovieCell
+        cell.set(with: resultsArray[indexPath.row])
+        return cell
+    }
 }
