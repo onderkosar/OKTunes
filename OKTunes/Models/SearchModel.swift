@@ -16,7 +16,7 @@ struct SearchModel: Codable, Hashable {
 struct Results: Codable, Hashable {
     let artistId, collectionId, trackId: Int?
     let artistName, collectionName, trackName: String?
-    let previewUrl: String?
+    let previewUrl, trackViewUrl: String?
     let artworkUrl100: String
     let releaseDate: String
     let primaryGenreName: String

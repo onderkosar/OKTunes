@@ -35,7 +35,7 @@ class MovieVC: OKDataLoadingVC {
     
     func getItunes() {
         showLoadingView()
-        NetworkManager.shared.fetch(from: URLStrings.movies) { (movies: SearchModel) in
+        NetworkManager.shared.fetch(from: URLStrings.movies2) { (movies: SearchModel) in
             self.dismissLoadingView()
             self.updateUI(with: movies.results)
         }
@@ -68,8 +68,9 @@ extension MovieVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let destinationVC = ItemInfoVC()
-        destinationVC.set(with: resultsArray[indexPath.row])
+        let destinationVC       = ItemInfoVC()
+        destinationVC.result    = resultsArray[indexPath.row]
+        
         present(destinationVC, animated: true, completion: nil)
     }
 }

@@ -29,7 +29,7 @@ class OKSecondaryTitleLabel: UILabel {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        textColor                   = .lightText
-        lineBreakMode               = .byTruncatingTail
+        textColor       = .lightText
+        lineBreakMode   = .byTruncatingTail
     }
 }

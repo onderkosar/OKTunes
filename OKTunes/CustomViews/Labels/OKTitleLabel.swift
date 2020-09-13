@@ -30,7 +30,7 @@ class OKTitleLabel: UILabel {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        textColor                   = .darkText
-        lineBreakMode               = .byTruncatingTail
+        textColor           = .darkText
+        lineBreakMode       = .byTruncatingTail
     }
 }

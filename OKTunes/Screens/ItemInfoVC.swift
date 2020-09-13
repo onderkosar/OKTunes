@@ -7,66 +7,75 @@
 //
 
 import UIKit
-import AVFoundation
 
 
 class ItemInfoVC: OKDataLoadingVC {
-    let titleLabel          = OKTitleLabel(textAlignment: .center, fontSize: 18)
-    let previewView         = UIView()
-    let descriptionView     = OKSecondaryTitleLabel(fontSize: 16)
+    let contentView     = OKItemView(color: .darkGray, cornerRadius: 16, borderWidth: 4)
+    
+    let posterImgView   = OKImageView(content: .scaleAspectFit)
+    let infoView        = OKItemView(color: .clear, cornerRadius: 10, borderWidth: 2)
+    let overviewView    = OKItemView(color: .clear, cornerRadius: 10, borderWidth: 2)
+    let buttonsView     = OKItemView(color: .lightGray, cornerRadius: 10, borderWidth: 2)
+    
+    var result: Results!
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray
+        configureViewLayout()
+        configureContentViewLayout()
+        configureUIElements()
+    }
+    
+    private func configureViewLayout() {
+        view.addSubview(contentView)
+        contentView.pinToEdges(of: view, by: 15)
+    }
+    
+    private func configureContentViewLayout() {
+        contentView.addSubviews(posterImgView, infoView, overviewView, buttonsView)
         
-        configureElements()
-        configureUI()
-    }
-    
-    
-    private func configureElements() {
-        titleLabel.adjustsFontSizeToFitWidth    = true
-        
-        descriptionView.textAlignment           = .justified
-        descriptionView.numberOfLines           = 30
-    }
-    
-    func set(with result: Results) {
-        titleLabel.text = result.trackName
-        showPLayer(urlString: result.previewUrl ?? "N/A")
-        descriptionView.text = result.longDescription
-    }
-    
-    private func configureUI() {
-        view.addSubviews(titleLabel, previewView, descriptionView)
+        let posterHeight: CGFloat   = 140
+        let posterWidth: CGFloat    = posterHeight * 27 / 40
+        let padding: CGFloat        = 10
         
         NSLayoutConstraint.activate([
-            previewView.topAnchor.constraint(equalTo: view.topAnchor),
-            previewView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            previewView.widthAnchor.constraint(equalToConstant: view.frame.width),
-            previewView.heightAnchor.constraint(equalToConstant: view.frame.width * 9 / 16),
+            posterImgView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
+            posterImgView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            posterImgView.widthAnchor.constraint(equalToConstant: posterWidth),
+            posterImgView.heightAnchor.constraint(equalToConstant: posterHeight),
             
-            titleLabel.topAnchor.constraint(equalTo: previewView.bottomAnchor, constant: 10),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            titleLabel.heightAnchor.constraint(equalToConstant: 20),
+            infoView.topAnchor.constraint(equalTo: posterImgView.topAnchor),
+            infoView.leadingAnchor.constraint(equalTo: posterImgView.trailingAnchor, constant: padding),
+            infoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            infoView.bottomAnchor.constraint(equalTo: posterImgView.bottomAnchor),
             
-            descriptionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            descriptionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            descriptionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
-            ])
+            overviewView.topAnchor.constraint(equalTo: posterImgView.bottomAnchor, constant: padding),
+            overviewView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            overviewView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            overviewView.heightAnchor.constraint(equalToConstant: 400),
+
+            buttonsView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            buttonsView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            buttonsView.heightAnchor.constraint(equalToConstant: 45),
+            buttonsView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding)
+            
+        ])
     }
     
-    func showPLayer(urlString: String) {
-            if let url = URL(string: urlString) {
-                let player = AVPlayer(url: url)
-                let playerLayer = AVPlayerLayer(player: player)
-                previewView.layer.addSublayer(playerLayer)
-//                playerLayer.frame = previewView.frame
-                playerLayer.frame = CGRect(x: 5, y: 5, width: view.frame.width - 10, height: (view.frame.width * 9 / 16) - 10)
-                
-                player.play()
-            }
-        }
+    func configureUIElements() {
+        posterImgView.downloadImage(fromURL: URL(string: result.artworkUrl100)!)
+        
+        add(childVC: InfoVC(model: result), to: infoView)
+        add(childVC: OverviewVC(model: result), to: overviewView)
+        add(childVC: ButtonsVC(model: result), to: buttonsView)
+    }
+    
+    func add(childVC: UIViewController, to containerView: UIView) {
+        addChild(childVC)
+        containerView.addSubview(childVC.view)
+        childVC.view.frame = containerView.bounds
+        childVC.didMove(toParent: self)
+    }
 }

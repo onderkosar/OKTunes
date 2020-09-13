@@ -19,8 +19,6 @@ extension Date {
 }
 
 extension String {
-//    2010-11-19T08:00:00Z
-    
     func convertToDate() -> Date? {
         let dateFormatter           = DateFormatter()
         dateFormatter.dateFormat    = "yyyy-MM-dd'T'HH:mm:ssZ"
