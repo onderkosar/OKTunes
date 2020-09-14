@@ -16,14 +16,16 @@ enum SFSymbols {
 }
 
 enum URLStrings {
-    static let musics       = "https://itunes.apple.com/search?entity=song&attribute=ratingIndex&limit=20"
-    static let movies       = "https://itunes.apple.com/search?term=movie&entity=movie&attribute=ratingTerm&limit=20"
-    static let podcasts     = "https://itunes.apple.com/search?entity=podcast&attribute=ratingTerm&limit=20"
+    static let musics           = "https://itunes.apple.com/search?entity=song&attribute=ratingIndex&limit=20"
+    static let movies           = "https://itunes.apple.com/search?term=movie&entity=movie&attribute=ratingTerm&limit=20"
+    static let podcasts         = "https://itunes.apple.com/search?entity=podcast&attribute=ratingTerm&limit=20"
     
-    static let artistName   = "https://itunes.apple.com/search?entity=musicArtist"
-    static let movieName    = "https://itunes.apple.com/search?entity=movie"
+    static let artistName       = "https://itunes.apple.com/search?entity=musicArtist"
+    static let movieName        = "https://itunes.apple.com/search?entity=movie"
+    static let sonfByArtistName = "https://itunes.apple.com/search?entity=song"
     
-    static let songById     = "https://itunes.apple.com/lookup?entity=song"
+    static let songsByArtistId  = "https://itunes.apple.com/lookup?entity=song"
+    static let movieByMovieId   = "https://itunes.apple.com/lookup?id=431020315&entity=movie"
 }
 
 let segmentedItems = ["music", "movie"]

@@ -34,7 +34,6 @@
 		957A0766250E4DCE00DB0C0D /* ButtonsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957A0765250E4DCE00DB0C0D /* ButtonsVC.swift */; };
 		95AD31EA250F9CFC00C8E1E6 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AD31E9250F9CFC00C8E1E6 /* SearchVC.swift */; };
 		95AD31EE250FE60D00C8E1E6 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AD31ED250FE60D00C8E1E6 /* SearchTableViewCell.swift */; };
-		95B739EB25100F1F00DBD09D /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B739EA25100F1F00DBD09D /* SearchModel.swift */; };
 		DE90B9A526FE2CC5B19EA674 /* Pods_OKTunes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C53DE7BE894CF5AB396A44 /* Pods_OKTunes.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,7 +69,6 @@
 		957A0765250E4DCE00DB0C0D /* ButtonsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsVC.swift; sourceTree = "<group>"; };
 		95AD31E9250F9CFC00C8E1E6 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		95AD31ED250FE60D00C8E1E6 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
-		95B739EA25100F1F00DBD09D /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		CFC78486F244E4350867D4FD /* Pods-OKTunes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OKTunes.debug.xcconfig"; path = "Target Support Files/Pods-OKTunes/Pods-OKTunes.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -177,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				955EDBA0250BEB180079599E /* FetchModel.swift */,
-				95B739EA25100F1F00DBD09D /* SearchModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -396,7 +393,6 @@
 				955EDBA7250C29460079599E /* OKTitleLabel.swift in Sources */,
 				95AD31EE250FE60D00C8E1E6 /* SearchTableViewCell.swift in Sources */,
 				95078575250D8D13006D9A0A /* OKButton.swift in Sources */,
-				95B739EB25100F1F00DBD09D /* SearchModel.swift in Sources */,
 				957A0764250E4DC000DB0C0D /* OverviewVC.swift in Sources */,
 				955EDB8D250BB44E0079599E /* OKTabBarController.swift in Sources */,
 				955255A5250CED7F00C8A558 /* MovieCell.swift in Sources */,

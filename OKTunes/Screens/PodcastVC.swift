@@ -37,12 +37,12 @@ class PodcastVC: OKDataLoadingVC {
         showLoadingView()
         NetworkManager.shared.fetch(from: URLStrings.podcasts) { (podcasts: FetchModel) in
             self.dismissLoadingView()
-            self.updateUI(with: podcasts.results)
+            self.resultsArray.append(contentsOf: podcasts.results)
+            self.updateUI()
         }
     }
     
-    func updateUI(with resultsArray : [AllResults]) {
-        self.resultsArray.append(contentsOf: resultsArray)
+    func updateUI() {
         DispatchQueue.main.async {
             self.podcastsCollectionView.reloadData()
         }

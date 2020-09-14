@@ -30,7 +30,7 @@ class MovieCell: UICollectionViewCell {
         movieLbl.text       = result.trackName
         directorLbl.text    = "Director: " + (result.artistName ?? "NA")
         releaseDateLbl.text = "Rel Date: " + result.date
-        artworkImgView.downloadImage(fromURL: URL(string: result.artworkUrl100)!)
+        artworkImgView.downloadImage(fromURL: URL(string: result.artworkUrl100!)!)
     }
     
     private func configure() {

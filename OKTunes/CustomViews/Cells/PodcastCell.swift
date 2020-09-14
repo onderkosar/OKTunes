@@ -30,7 +30,7 @@ class PodcastCell: UICollectionViewCell {
         trackLbl.text   = result.trackName
         genrdeLbl.text  = result.primaryGenreName
         artistLbl.text  = result.artistName
-        artworkImgView.downloadImage(fromURL: URL(string: result.artworkUrl100)!)
+        artworkImgView.downloadImage(fromURL: URL(string: result.artworkUrl100!)!)
     }
     
     private func configure() {

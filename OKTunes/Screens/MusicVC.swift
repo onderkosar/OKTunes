@@ -37,12 +37,12 @@ class MusicVC: OKDataLoadingVC {
         showLoadingView()
         NetworkManager.shared.fetch(from: URLStrings.musics) { (musics: FetchModel) in
             self.dismissLoadingView()
-            self.updateUI(with: musics.results)
+            self.resultsArray.append(contentsOf: musics.results)
+            self.updateUI()
         }
     }
     
-    func updateUI(with resultsArray : [AllResults]) {
-        self.resultsArray.append(contentsOf: resultsArray)
+    func updateUI() {
         DispatchQueue.main.async {
             self.musicsCollectionView.reloadData()
         }

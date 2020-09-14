@@ -65,7 +65,7 @@ class ItemInfoVC: OKDataLoadingVC {
     }
     
     func configureUIElements() {
-        posterImgView.downloadImage(fromURL: URL(string: result.artworkUrl100)!)
+        posterImgView.downloadImage(fromURL: URL(string: result.artworkUrl100!)!)
         
         add(childVC: InfoVC(model: result), to: infoView)
         add(childVC: OverviewVC(model: result), to: overviewView)

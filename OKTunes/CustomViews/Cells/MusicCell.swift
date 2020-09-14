@@ -28,9 +28,9 @@ class MusicCell: UICollectionViewCell {
     
     func set(with result: AllResults) {
         trackLbl.text   = result.trackName
-        albumLbl.text   = result.collectionName
+        albumLbl.text   = result.collectionName!
         artistLbl.text  = result.artistName
-        artworkImgView.downloadImage(fromURL: URL(string: result.artworkUrl100)!)
+        artworkImgView.downloadImage(fromURL: URL(string: result.artworkUrl100!)!)
     }
     
     private func configure() {

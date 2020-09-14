@@ -15,7 +15,7 @@ class SearchVC: OKDataLoadingVC {
     var tableView           = UITableView()
     var searchBar           = UISearchBar()
     
-    var onderArray          = [SearchResults]()
+    var searchResultsArray  = [AllResults]()
     let disposebag          = DisposeBag()
     
     var movieSelected       = false
@@ -90,7 +90,7 @@ class SearchVC: OKDataLoadingVC {
             .ifEmpty(default: "")
             .subscribe(onNext: { [weak self ](text) in
                 guard let strongSelf = self else { return }
-                strongSelf.onderArray.removeAll()
+                strongSelf.searchResultsArray.removeAll()
                 DispatchQueue.main.async {
                     strongSelf.tableView.reloadData()
                 }
@@ -98,21 +98,23 @@ class SearchVC: OKDataLoadingVC {
     }
     
     func searchItunes(text: String) {
-        NetworkManager.shared.fetch(from: urlString + "&term=" + text) { (model: SearchModel) in
+        let remainingValue  = "&term=" + text.replaceSpaceWithPlus()
+        
+        NetworkManager.shared.fetch(from: urlString + remainingValue) { (model: FetchModel) in
             self.updateUI(with: model.results)
         }
     }
     
-    func updateUI(with resultsArray : [SearchResults]) {
-        self.onderArray.removeAll()
-        self.onderArray.append(contentsOf: resultsArray)
+    func updateUI(with resultsArray : [AllResults]) {
+        self.searchResultsArray.removeAll()
+        self.searchResultsArray.append(contentsOf: resultsArray)
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
     
     @objc func switchSegControl(sender: UISegmentedControl) {
-        onderArray.removeAll()
+        searchResultsArray.removeAll()
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -136,12 +138,12 @@ class SearchVC: OKDataLoadingVC {
 extension SearchVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return onderArray.count
+        return searchResultsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell            = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.reuseID) as! SearchTableViewCell
-        let searchResult    = onderArray[indexPath.row]
+        let searchResult    = searchResultsArray[indexPath.row]
         
         if movieSelected {
             cell.set(with: searchResult.trackName!)
@@ -153,10 +155,24 @@ extension SearchVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let searchResult    = onderArray[indexPath.row]
-        let destVC          = MusicVC()
-        
-        let navController   = UINavigationController(rootViewController: destVC)
-        present(navController, animated: true)
+        let searchResult    = searchResultsArray[indexPath.row]
+        if movieSelected {
+            let destVC          = ItemInfoVC()
+            destVC.result       = searchResult
+            
+            let navController   = UINavigationController(rootViewController: destVC)
+            present(navController, animated: true)
+        } else {
+            let remainingValue  = "&term=\(searchResult.artistName!.replaceSpaceWithPlus())"
+            let urlString       = URLStrings.sonfByArtistName + remainingValue
+            let destVC          = MusicVC()
+            
+            NetworkManager.shared.fetch(from: urlString) { (model: FetchModel) in
+                destVC.resultsArray.append(contentsOf: model.results)
+            }
+            
+            let navController   = UINavigationController(rootViewController: destVC)
+            present(navController, animated: true)
+        }
     }
 }

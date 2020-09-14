@@ -37,12 +37,12 @@ class MovieVC: OKDataLoadingVC {
         showLoadingView()
         NetworkManager.shared.fetch(from: URLStrings.movies) { (movies: FetchModel) in
             self.dismissLoadingView()
-            self.updateUI(with: movies.results)
+            self.resultsArray.append(contentsOf: movies.results)
+            self.updateUI()
         }
     }
     
-    func updateUI(with resultsArray : [AllResults]) {
-        self.resultsArray.append(contentsOf: resultsArray)
+    func updateUI() {
         DispatchQueue.main.async {
             self.moviesCollectionView.reloadData()
         }
