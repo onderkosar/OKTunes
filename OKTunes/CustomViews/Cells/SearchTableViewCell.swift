@@ -22,8 +22,8 @@ class SearchTableViewCell: UITableViewCell {
     }
     
     
-    func set(with result: ArtistResults) {
-        artistNameLbl.text   = result.artistName
+    func set(with result: String) {
+        artistNameLbl.text   = result
     }
     
     private func configure() {

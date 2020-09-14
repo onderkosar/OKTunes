@@ -24,7 +24,7 @@
 		955EDB9B250BDF960079599E /* MusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB9A250BDF960079599E /* MusicCell.swift */; };
 		955EDB9D250BE5190079599E /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB9C250BE5190079599E /* UIView+Ext.swift */; };
 		955EDB9F250BEAAA0079599E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDB9E250BEAAA0079599E /* NetworkManager.swift */; };
-		955EDBA1250BEB180079599E /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDBA0250BEB180079599E /* SearchModel.swift */; };
+		955EDBA1250BEB180079599E /* FetchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDBA0250BEB180079599E /* FetchModel.swift */; };
 		955EDBA4250C23CF0079599E /* OKImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDBA3250C23CF0079599E /* OKImageView.swift */; };
 		955EDBA7250C29460079599E /* OKTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDBA6250C29460079599E /* OKTitleLabel.swift */; };
 		955EDBA9250C2B070079599E /* OKSecondaryTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955EDBA8250C2B070079599E /* OKSecondaryTitleLabel.swift */; };
@@ -34,6 +34,7 @@
 		957A0766250E4DCE00DB0C0D /* ButtonsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957A0765250E4DCE00DB0C0D /* ButtonsVC.swift */; };
 		95AD31EA250F9CFC00C8E1E6 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AD31E9250F9CFC00C8E1E6 /* SearchVC.swift */; };
 		95AD31EE250FE60D00C8E1E6 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AD31ED250FE60D00C8E1E6 /* SearchTableViewCell.swift */; };
+		95B739EB25100F1F00DBD09D /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B739EA25100F1F00DBD09D /* SearchModel.swift */; };
 		DE90B9A526FE2CC5B19EA674 /* Pods_OKTunes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C53DE7BE894CF5AB396A44 /* Pods_OKTunes.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,7 +60,7 @@
 		955EDB9A250BDF960079599E /* MusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicCell.swift; sourceTree = "<group>"; };
 		955EDB9C250BE5190079599E /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		955EDB9E250BEAAA0079599E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		955EDBA0250BEB180079599E /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
+		955EDBA0250BEB180079599E /* FetchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchModel.swift; sourceTree = "<group>"; };
 		955EDBA3250C23CF0079599E /* OKImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKImageView.swift; sourceTree = "<group>"; };
 		955EDBA6250C29460079599E /* OKTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKTitleLabel.swift; sourceTree = "<group>"; };
 		955EDBA8250C2B070079599E /* OKSecondaryTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKSecondaryTitleLabel.swift; sourceTree = "<group>"; };
@@ -69,6 +70,7 @@
 		957A0765250E4DCE00DB0C0D /* ButtonsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsVC.swift; sourceTree = "<group>"; };
 		95AD31E9250F9CFC00C8E1E6 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		95AD31ED250FE60D00C8E1E6 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		95B739EA25100F1F00DBD09D /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		CFC78486F244E4350867D4FD /* Pods-OKTunes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OKTunes.debug.xcconfig"; path = "Target Support Files/Pods-OKTunes/Pods-OKTunes.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -174,7 +176,8 @@
 		955EDB88250BB3F50079599E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				955EDBA0250BEB180079599E /* SearchModel.swift */,
+				955EDBA0250BEB180079599E /* FetchModel.swift */,
+				95B739EA25100F1F00DBD09D /* SearchModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -393,11 +396,12 @@
 				955EDBA7250C29460079599E /* OKTitleLabel.swift in Sources */,
 				95AD31EE250FE60D00C8E1E6 /* SearchTableViewCell.swift in Sources */,
 				95078575250D8D13006D9A0A /* OKButton.swift in Sources */,
+				95B739EB25100F1F00DBD09D /* SearchModel.swift in Sources */,
 				957A0764250E4DC000DB0C0D /* OverviewVC.swift in Sources */,
 				955EDB8D250BB44E0079599E /* OKTabBarController.swift in Sources */,
 				955255A5250CED7F00C8A558 /* MovieCell.swift in Sources */,
 				955EDBA9250C2B070079599E /* OKSecondaryTitleLabel.swift in Sources */,
-				955EDBA1250BEB180079599E /* SearchModel.swift in Sources */,
+				955EDBA1250BEB180079599E /* FetchModel.swift in Sources */,
 				955EDB9D250BE5190079599E /* UIView+Ext.swift in Sources */,
 				957A0766250E4DCE00DB0C0D /* ButtonsVC.swift in Sources */,
 				957A075D250E4AF200DB0C0D /* OKItemView.swift in Sources */,

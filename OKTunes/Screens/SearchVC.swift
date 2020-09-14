@@ -11,31 +11,65 @@ import RxSwift
 import RxCocoa
 
 class SearchVC: OKDataLoadingVC {
-    var searchBar   = UISearchBar()
-    var tableView   = UITableView()
+    var segmentedControl    = UISegmentedControl(items: segmentedItems)
+    var tableView           = UITableView()
+    var searchBar           = UISearchBar()
     
-    var searchArray = [ArtistResults]()
-    let disposebag  = DisposeBag()
+    var onderArray          = [SearchResults]()
+    let disposebag          = DisposeBag()
+    
+    var movieSelected       = false
+    var urlString           = URLStrings.artistName
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .darkGray
-        setupSearchBar()
-        searchBarFunc()
+        view.backgroundColor = .lightGray
+        configureLayout()
+        configureSegControl()
         configureTableView()
+        configureSearchBar()
+        searchBarFunc()
     }
     
-    func configureTableView() {
-        view.addSubview(tableView)
-        tableView.pinToEdges(of: view, by: 0)
+    
+    private func configureLayout() {
+        view.addSubviews(segmentedControl, tableView)
         
+        NSLayoutConstraint.activate([
+            segmentedControl.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -5),
+            segmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            segmentedControl.widthAnchor.constraint(equalToConstant: 200),
+            segmentedControl.heightAnchor.constraint(equalToConstant: 40),
+            
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: segmentedControl.topAnchor, constant: -5)
+        ])
+    }
+    
+    private func configureSegControl() {
+        segmentedControl.selectedSegmentIndex   = 0
+        segmentedControl.backgroundColor        = .darkGray
+        segmentedControl.layer.borderWidth      = 2
+        segmentedControl.layer.borderColor      = UIColor.white.cgColor
+        segmentedControl.addTarget(self, action: #selector(switchSegControl), for: .valueChanged)
+    }
+    
+    private func configureTableView() {
         tableView.frame         = view.bounds
         tableView.rowHeight     = 40
         tableView.delegate      = self
         tableView.dataSource    = self
         
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.reuseID)
+    }
+    
+    private func configureSearchBar() {
+        searchBar.sizeToFit()
+        searchBar.placeholder       = NSLocalizedString("search musics by artist name", comment: "")
+        navigationItem.titleView    = searchBar
     }
     
     func searchBarFunc() {
@@ -47,7 +81,7 @@ class SearchVC: OKDataLoadingVC {
             .filter { $0.count > 2 }
             .subscribe(onNext: { [weak self ](text) in
                 guard let strongSelf = self else { return }
-                strongSelf.searchItunesMusic(text: text)
+                strongSelf.searchItunes(text: text)
             }).disposed(by: disposebag)
         
         self.searchBar
@@ -56,39 +90,44 @@ class SearchVC: OKDataLoadingVC {
             .ifEmpty(default: "")
             .subscribe(onNext: { [weak self ](text) in
                 guard let strongSelf = self else { return }
-                strongSelf.searchArray.removeAll()
+                strongSelf.onderArray.removeAll()
                 DispatchQueue.main.async {
                     strongSelf.tableView.reloadData()
                 }
             }).disposed(by: disposebag)
-        
-        self.searchBar
-            .rx
-            .cancelButtonClicked
-            .subscribe(onNext: { [weak self] in
-                guard let strongSelf = self else { return }
-                strongSelf.searchBar.resignFirstResponder()
-            }).disposed(by: disposebag)
     }
     
-    func setupSearchBar() {
-        searchBar.sizeToFit()
-        searchBar.showsCancelButton = true
-        searchBar.placeholder       = NSLocalizedString("search", comment: "")
-        navigationItem.titleView    = searchBar
-    }
-    
-    func searchItunesMusic(text: String) {
-        NetworkManager.shared.fetch(from: URLStrings.artistName + "&term=" + text) { (musics: ArtistModel) in
-            self.updateUI(with: musics.results)
+    func searchItunes(text: String) {
+        NetworkManager.shared.fetch(from: urlString + "&term=" + text) { (model: SearchModel) in
+            self.updateUI(with: model.results)
         }
     }
     
-    func updateUI(with resultsArray : [ArtistResults]) {
-        self.searchArray.removeAll()
-        self.searchArray.append(contentsOf: resultsArray)
+    func updateUI(with resultsArray : [SearchResults]) {
+        self.onderArray.removeAll()
+        self.onderArray.append(contentsOf: resultsArray)
         DispatchQueue.main.async {
             self.tableView.reloadData()
+        }
+    }
+    
+    @objc func switchSegControl(sender: UISegmentedControl) {
+        onderArray.removeAll()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
+        switch sender.selectedSegmentIndex {
+        case 1:
+            searchBar.placeholder   = NSLocalizedString("search movies by movie name", comment: "")
+            searchBar.text          = ""
+            urlString               = URLStrings.movieName
+            movieSelected           = true
+        default:
+            searchBar.placeholder   = NSLocalizedString("search musics by artist name", comment: "")
+            searchBar.text          = ""
+            urlString               = URLStrings.artistName
+            movieSelected           = false
         }
     }
 }
@@ -97,19 +136,24 @@ class SearchVC: OKDataLoadingVC {
 extension SearchVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchArray.count
+        return onderArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell            = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.reuseID) as! SearchTableViewCell
-        let searchResult        = searchArray[indexPath.row]
-        cell.set(with: searchResult)
+        let searchResult    = onderArray[indexPath.row]
+        
+        if movieSelected {
+            cell.set(with: searchResult.trackName!)
+        } else {
+            cell.set(with: searchResult.artistName!)
+        }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let searchResult    = searchArray[indexPath.row]
+        let searchResult    = onderArray[indexPath.row]
         let destVC          = MusicVC()
         
         let navController   = UINavigationController(rootViewController: destVC)

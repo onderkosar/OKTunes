@@ -21,5 +21,9 @@ enum URLStrings {
     static let podcasts     = "https://itunes.apple.com/search?entity=podcast&attribute=ratingTerm&limit=20"
     
     static let artistName   = "https://itunes.apple.com/search?entity=musicArtist"
+    static let movieName    = "https://itunes.apple.com/search?entity=movie"
+    
     static let songById     = "https://itunes.apple.com/lookup?entity=song"
 }
+
+let segmentedItems = ["music", "movie"]

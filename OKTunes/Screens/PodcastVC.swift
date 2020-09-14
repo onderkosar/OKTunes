@@ -35,7 +35,7 @@ class PodcastVC: OKDataLoadingVC {
     
     func getItunes() {
         showLoadingView()
-        NetworkManager.shared.fetch(from: URLStrings.podcasts) { (podcasts: SearchModel) in
+        NetworkManager.shared.fetch(from: URLStrings.podcasts) { (podcasts: FetchModel) in
             self.dismissLoadingView()
             self.updateUI(with: podcasts.results)
         }

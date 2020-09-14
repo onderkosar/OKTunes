@@ -35,7 +35,7 @@ class MovieVC: OKDataLoadingVC {
     
     func getItunes() {
         showLoadingView()
-        NetworkManager.shared.fetch(from: URLStrings.movies) { (movies: SearchModel) in
+        NetworkManager.shared.fetch(from: URLStrings.movies) { (movies: FetchModel) in
             self.dismissLoadingView()
             self.updateUI(with: movies.results)
         }
