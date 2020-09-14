@@ -17,7 +17,7 @@ class ItemInfoVC: OKDataLoadingVC {
     let overviewView    = OKItemView(color: .clear, cornerRadius: 10, borderWidth: 2)
     let buttonsView     = OKItemView(color: .lightGray, cornerRadius: 10, borderWidth: 2)
     
-    var result: Results!
+    var result: AllResults!
 
     
     override func viewDidLoad() {

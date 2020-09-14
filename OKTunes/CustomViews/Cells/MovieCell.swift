@@ -26,7 +26,7 @@ class MovieCell: UICollectionViewCell {
     }
     
     
-    func set(with result: Results) {
+    func set(with result: AllResults) {
         movieLbl.text       = result.trackName
         directorLbl.text    = "Director: " + (result.artistName ?? "NA")
         releaseDateLbl.text = "Rel Date: " + result.date

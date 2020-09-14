@@ -13,9 +13,9 @@ class InfoVC: UIViewController {
     let directorLbl     = OKSecondaryTitleLabel(fontSize: 15)
     let releaseDateLbl  = OKSecondaryTitleLabel(fontSize: 12)
     
-    var result: Results!
+    var result: AllResults!
 
-    init(model: Results) {
+    init(model: AllResults) {
         super.init(nibName: nil, bundle: nil)
         self.result     = model
     }

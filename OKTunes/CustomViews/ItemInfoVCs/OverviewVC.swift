@@ -12,9 +12,9 @@ class OverviewVC: UIViewController {
     let titleLbl        = OKTitleLabel(textAlignment: .left, fontSize: 16)
     let descriptionLbl  = OKSecondaryTitleLabel(fontSize: 16)
     
-    var result: Results!
+    var result: AllResults!
 
-    init(model: Results) {
+    init(model: AllResults) {
         super.init(nibName: nil, bundle: nil)
         self.result     = model
     }

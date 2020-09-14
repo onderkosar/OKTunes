@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -32,9 +32,14 @@
 		957A0762250E4DB000DB0C0D /* InfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957A0761250E4DB000DB0C0D /* InfoVC.swift */; };
 		957A0764250E4DC000DB0C0D /* OverviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957A0763250E4DC000DB0C0D /* OverviewVC.swift */; };
 		957A0766250E4DCE00DB0C0D /* ButtonsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957A0765250E4DCE00DB0C0D /* ButtonsVC.swift */; };
+		95AD31EA250F9CFC00C8E1E6 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AD31E9250F9CFC00C8E1E6 /* SearchVC.swift */; };
+		95AD31EE250FE60D00C8E1E6 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AD31ED250FE60D00C8E1E6 /* SearchTableViewCell.swift */; };
+		DE90B9A526FE2CC5B19EA674 /* Pods_OKTunes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C53DE7BE894CF5AB396A44 /* Pods_OKTunes.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		21B4D2B21040BBE6363D51FA /* Pods-OKTunes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OKTunes.release.xcconfig"; path = "Target Support Files/Pods-OKTunes/Pods-OKTunes.release.xcconfig"; sourceTree = "<group>"; };
+		28C53DE7BE894CF5AB396A44 /* Pods_OKTunes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OKTunes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9507856C250D5D0A006D9A0A /* ItemInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInfoVC.swift; sourceTree = "<group>"; };
 		95078574250D8D13006D9A0A /* OKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKButton.swift; sourceTree = "<group>"; };
 		955255A4250CED7F00C8A558 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
@@ -62,6 +67,9 @@
 		957A0761250E4DB000DB0C0D /* InfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoVC.swift; sourceTree = "<group>"; };
 		957A0763250E4DC000DB0C0D /* OverviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewVC.swift; sourceTree = "<group>"; };
 		957A0765250E4DCE00DB0C0D /* ButtonsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsVC.swift; sourceTree = "<group>"; };
+		95AD31E9250F9CFC00C8E1E6 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		95AD31ED250FE60D00C8E1E6 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		CFC78486F244E4350867D4FD /* Pods-OKTunes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OKTunes.debug.xcconfig"; path = "Target Support Files/Pods-OKTunes/Pods-OKTunes.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,12 +77,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE90B9A526FE2CC5B19EA674 /* Pods_OKTunes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		46BA2B6021D9A8ADEDF53347 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CFC78486F244E4350867D4FD /* Pods-OKTunes.debug.xcconfig */,
+				21B4D2B21040BBE6363D51FA /* Pods-OKTunes.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		95078573250D8D01006D9A0A /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +106,8 @@
 			children = (
 				955EDB70250BAEBB0079599E /* OKTunes */,
 				955EDB6F250BAEBB0079599E /* Products */,
+				46BA2B6021D9A8ADEDF53347 /* Pods */,
+				E35E215D72BDD9EB4C9BFD07 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,6 +151,7 @@
 				955EDB94250BD09B0079599E /* PodcastVC.swift */,
 				955EDB90250BB4800079599E /* MovieVC.swift */,
 				9507856C250D5D0A006D9A0A /* ItemInfoVC.swift */,
+				95AD31E9250F9CFC00C8E1E6 /* SearchVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -197,6 +218,7 @@
 				955EDB9A250BDF960079599E /* MusicCell.swift */,
 				955255AA250CF80400C8A558 /* PodcastCell.swift */,
 				955255A4250CED7F00C8A558 /* MovieCell.swift */,
+				95AD31ED250FE60D00C8E1E6 /* SearchTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -236,6 +258,14 @@
 			path = ItemInfoVCs;
 			sourceTree = "<group>";
 		};
+		E35E215D72BDD9EB4C9BFD07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				28C53DE7BE894CF5AB396A44 /* Pods_OKTunes.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -243,9 +273,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 955EDB82250BAEBD0079599E /* Build configuration list for PBXNativeTarget "OKTunes" */;
 			buildPhases = (
+				3A353BAB5C3440549C10A56F /* [CP] Check Pods Manifest.lock */,
 				955EDB6A250BAEBB0079599E /* Sources */,
 				955EDB6B250BAEBB0079599E /* Frameworks */,
 				955EDB6C250BAEBB0079599E /* Resources */,
+				8EA57D41786A46FC9C6657C7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -301,6 +333,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3A353BAB5C3440549C10A56F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OKTunes-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8EA57D41786A46FC9C6657C7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OKTunes/Pods-OKTunes-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OKTunes/Pods-OKTunes-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OKTunes/Pods-OKTunes-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		955EDB6A250BAEBB0079599E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -313,9 +387,11 @@
 				955255AB250CF80400C8A558 /* PodcastCell.swift in Sources */,
 				955EDB9F250BEAAA0079599E /* NetworkManager.swift in Sources */,
 				955EDB98250BD8B30079599E /* OKDataLoadingVC.swift in Sources */,
+				95AD31EA250F9CFC00C8E1E6 /* SearchVC.swift in Sources */,
 				955255A9250CF0B800C8A558 /* DataType+Ext.swift in Sources */,
 				955EDB9B250BDF960079599E /* MusicCell.swift in Sources */,
 				955EDBA7250C29460079599E /* OKTitleLabel.swift in Sources */,
+				95AD31EE250FE60D00C8E1E6 /* SearchTableViewCell.swift in Sources */,
 				95078575250D8D13006D9A0A /* OKButton.swift in Sources */,
 				957A0764250E4DC000DB0C0D /* OverviewVC.swift in Sources */,
 				955EDB8D250BB44E0079599E /* OKTabBarController.swift in Sources */,
@@ -462,6 +538,7 @@
 		};
 		955EDB83250BAEBD0079599E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CFC78486F244E4350867D4FD /* Pods-OKTunes.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -481,6 +558,7 @@
 		};
 		955EDB84250BAEBD0079599E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21B4D2B21040BBE6363D51FA /* Pods-OKTunes.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

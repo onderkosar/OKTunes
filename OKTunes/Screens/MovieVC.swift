@@ -11,7 +11,7 @@ import UIKit
 
 class MovieVC: OKDataLoadingVC {
     var moviesCollectionView: UICollectionView!
-    var resultsArray: [Results] = []
+    var resultsArray: [AllResults] = []
     
     
     override func viewDidLoad() {
@@ -35,13 +35,13 @@ class MovieVC: OKDataLoadingVC {
     
     func getItunes() {
         showLoadingView()
-        NetworkManager.shared.fetch(from: URLStrings.movies2) { (movies: SearchModel) in
+        NetworkManager.shared.fetch(from: URLStrings.movies) { (movies: SearchModel) in
             self.dismissLoadingView()
             self.updateUI(with: movies.results)
         }
     }
     
-    func updateUI(with resultsArray : [Results]) {
+    func updateUI(with resultsArray : [AllResults]) {
         self.resultsArray.append(contentsOf: resultsArray)
         DispatchQueue.main.async {
             self.moviesCollectionView.reloadData()

@@ -26,7 +26,7 @@ class MusicCell: UICollectionViewCell {
     }
     
     
-    func set(with result: Results) {
+    func set(with result: AllResults) {
         trackLbl.text   = result.trackName
         albumLbl.text   = result.collectionName
         artistLbl.text  = result.artistName

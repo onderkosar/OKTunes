@@ -14,9 +14,9 @@ class ButtonsVC: UIViewController {
     let previewBtn      = OKButton(backgroundColor: .darkGray, title: "Preview")
     let iTunesBtn       = OKButton(backgroundColor: .darkGray, title: "iTunes")
     
-    var result: Results!
+    var result: AllResults!
 
-    init(model: Results) {
+    init(model: AllResults) {
         super.init(nibName: nil, bundle: nil)
         self.result     = model
     }

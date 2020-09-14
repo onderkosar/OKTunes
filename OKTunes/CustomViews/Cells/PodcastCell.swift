@@ -26,7 +26,7 @@ class PodcastCell: UICollectionViewCell {
     }
     
     
-    func set(with result: Results) {
+    func set(with result: AllResults) {
         trackLbl.text   = result.trackName
         genrdeLbl.text  = result.primaryGenreName
         artistLbl.text  = result.artistName

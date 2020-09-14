@@ -11,7 +11,7 @@ import UIKit
 
 class PodcastVC: OKDataLoadingVC {
     var podcastsCollectionView: UICollectionView!
-    var resultsArray: [Results] = []
+    var resultsArray: [AllResults] = []
     
     
     override func viewDidLoad() {
@@ -41,7 +41,7 @@ class PodcastVC: OKDataLoadingVC {
         }
     }
     
-    func updateUI(with resultsArray : [Results]) {
+    func updateUI(with resultsArray : [AllResults]) {
         self.resultsArray.append(contentsOf: resultsArray)
         DispatchQueue.main.async {
             self.podcastsCollectionView.reloadData()

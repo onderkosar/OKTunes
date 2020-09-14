@@ -10,10 +10,10 @@ import Foundation
 
 struct SearchModel: Codable, Hashable {
     let resultCount: Int
-    let results: [Results]
+    let results: [AllResults]
 }
 
-struct Results: Codable, Hashable {
+struct AllResults: Codable, Hashable {
     let artistId, collectionId, trackId: Int?
     let artistName, collectionName, trackName: String?
     let previewUrl, trackViewUrl: String?
@@ -25,4 +25,24 @@ struct Results: Codable, Hashable {
     var date: String {
         return releaseDate.convertToDisplayFormat()
     }
+}
+
+struct ArtistModel: Codable, Hashable {
+    let resultCount: Int
+    let results: [ArtistResults]
+}
+
+struct ArtistResults: Codable, Hashable {
+    let artistId: Int?
+    let artistName: String?
+}
+
+struct MovieModel: Codable, Hashable {
+    let resultCount: Int
+    let results: [MovieResults]
+}
+
+struct MovieResults: Codable, Hashable {
+    let trackId: Int?
+    let tracName: String?
 }
