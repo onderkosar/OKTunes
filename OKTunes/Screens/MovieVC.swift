@@ -59,7 +59,9 @@ class MovieVC: OKDataLoadingVC {
 
 extension MovieVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (view.frame.width - 10), height: 100)
+        let width   = view.frame.width - 10
+        let height  = view.frame.height / 10
+        return CGSize(width: width, height: height)
     }
 }
 

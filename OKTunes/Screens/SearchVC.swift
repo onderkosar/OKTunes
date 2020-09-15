@@ -148,6 +148,7 @@ extension SearchVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell            = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.reuseID) as! SearchTableViewCell
+        cell.selectionStyle = .none
         let searchResult    = searchResultsArray[indexPath.row]
         
         if movieSelected {
@@ -160,25 +161,23 @@ extension SearchVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let searchResult    = searchResultsArray[indexPath.row]
+        let searchResult            = searchResultsArray[indexPath.row]
         if movieSelected {
-            let destVC          = ItemInfoVC()
-            destVC.result       = searchResult
+            let destinationVC       = ItemInfoVC()
+            destinationVC.result    = searchResult
             
-            let navController   = UINavigationController(rootViewController: destVC)
-            present(navController, animated: true)
+            view.window?.rootViewController?.present(destinationVC, animated: true, completion: nil)
         } else {
-            let remainingValue  = "&term=\(searchResult.artistName!.replaceSpaceWithPlus())"
-            let urlString       = URLStrings.songByArtistName + remainingValue
-            let destVC          = MusicVC()
-            destVC.pushedBySearchVC = true
+            let remainingValue      = "&term=\(searchResult.artistName!.replaceSpaceWithPlus())"
+            let urlString           = URLStrings.songByArtistName + remainingValue
+            let destinationVC       = MusicVC()
+            destinationVC.pushedBySearchVC = true
             
             NetworkManager.shared.fetch(from: urlString) { (model: FetchModel) in
-                destVC.resultsArray.append(contentsOf: model.results)
+                destinationVC.resultsArray.append(contentsOf: model.results)
             }
             
-            let navController   = UINavigationController(rootViewController: destVC)
-            present(navController, animated: true)
+            view.window?.rootViewController?.present(destinationVC, animated: true, completion: nil)
         }
     }
 }

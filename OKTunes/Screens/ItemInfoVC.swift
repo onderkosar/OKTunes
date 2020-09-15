@@ -93,7 +93,6 @@ class ItemInfoVC: OKDataLoadingVC {
         iTunesBtn.addTarget(self, action: #selector(iTunesBtnPressed), for: .touchUpInside)
         
         playBtn.setBackgroundImage(SFSymbols.play, for: .normal)
-        iTunesBtn.setBackgroundImage(SFSymbols.iTunes, for: .normal)
         
         playBtn.tintColor           = .black
         playBtn.alpha               = 0.4

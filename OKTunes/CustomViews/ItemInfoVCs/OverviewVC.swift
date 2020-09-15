@@ -40,11 +40,14 @@ class OverviewVC: UIViewController {
     private func configure() {
         view.addSubviews(descriptionLbl)
         
+        let height = view.frame.height
+        print(height)
+        
         NSLayoutConstraint.activate([
             descriptionLbl.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             descriptionLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
             descriptionLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
-            descriptionLbl.heightAnchor.constraint(lessThanOrEqualToConstant: 500)
+            descriptionLbl.heightAnchor.constraint(lessThanOrEqualToConstant: (height - 265))
         ])
     }
 }

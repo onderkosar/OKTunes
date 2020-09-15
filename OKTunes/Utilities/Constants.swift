@@ -17,9 +17,9 @@ enum SFSymbols {
 }
 
 enum URLStrings {
-    static let musics           = "https://itunes.apple.com/search?entity=song&attribute=ratingIndex&limit=20"
+    static let musics           = "https://itunes.apple.com/search?term=song&entity=song&attribute=ratingIndex&limit=20"
     static let movies           = "https://itunes.apple.com/search?term=movie&entity=movie&attribute=ratingTerm&limit=20"
-    static let podcasts         = "https://itunes.apple.com/search?entity=podcast&attribute=ratingTerm&limit=20"
+    static let podcasts         = "https://itunes.apple.com/search?term=podcast&entity=podcast&attribute=ratingTerm&limit=20"
     
     static let artistName       = "https://itunes.apple.com/search?entity=musicArtist"
     static let movieName        = "https://itunes.apple.com/search?entity=movie"
