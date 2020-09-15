@@ -105,7 +105,7 @@ class ItemInfoVC: OKDataLoadingVC {
         addChild(childVC)
         containerView.addSubview(childVC.view)
         
-#warning("Console is yelling at me here!")
+#warning("Console is yelling for constraints!")
         childVC.view.frame = containerView.bounds
         childVC.didMove(toParent: self)
     }

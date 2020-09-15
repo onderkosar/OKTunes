@@ -24,7 +24,7 @@ class SearchVC: OKDataLoadingVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .white
         configure()
         configureSegControl()
         configureTableView()
@@ -47,8 +47,8 @@ class SearchVC: OKDataLoadingVC {
             segmentedControl.heightAnchor.constraint(equalToConstant: 40),
             
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             tableView.bottomAnchor.constraint(equalTo: segmentedControl.topAnchor, constant: -5)
         ])
     }
@@ -57,15 +57,16 @@ class SearchVC: OKDataLoadingVC {
         segmentedControl.selectedSegmentIndex   = 0
         segmentedControl.backgroundColor        = .darkGray
         segmentedControl.layer.borderWidth      = 2
-        segmentedControl.layer.borderColor      = UIColor.white.cgColor
+        segmentedControl.layer.borderColor      = UIColor.darkGray.cgColor
         segmentedControl.addTarget(self, action: #selector(switchSegControl), for: .valueChanged)
     }
     
     private func configureTableView() {
-        tableView.frame         = view.bounds
-        tableView.rowHeight     = 40
-        tableView.delegate      = self
-        tableView.dataSource    = self
+        tableView.frame             = view.bounds
+        tableView.separatorStyle    = .none
+        tableView.rowHeight         = 40
+        tableView.delegate          = self
+        tableView.dataSource        = self
         
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.reuseID)
     }

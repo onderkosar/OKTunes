@@ -14,8 +14,6 @@ enum SFSymbols {
     static let podcast  = UIImage(named: "radiowaves")
     static let search   = UIImage(named: "magnifyingglass")
     static let play     = UIImage(named: "play")
-    static let pause    = UIImage(named: "pause")
-    static let iTunes   = UIImage(named: "iTunes_Store_Icon.psd")
 }
 
 enum URLStrings {
