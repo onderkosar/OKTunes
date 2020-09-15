@@ -66,4 +66,10 @@ extension PodcastVC: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.set(with: resultsArray[indexPath.row])
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let url = URL(string: resultsArray[indexPath.row].trackViewUrl!) {
+            UIApplication.shared.open(url)
+        }
+    }
 }

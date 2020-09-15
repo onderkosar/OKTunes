@@ -66,4 +66,12 @@ extension MusicVC: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.set(with: resultsArray[indexPath.row])
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let destinationVC       = ItemInfoVC()
+        destinationVC.result    = resultsArray[indexPath.row]
+        destinationVC.isMovie   = false
+        
+        present(destinationVC, animated: true, completion: nil)
+    }
 }

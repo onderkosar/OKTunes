@@ -31,7 +31,6 @@
 		957A075D250E4AF200DB0C0D /* OKItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957A075C250E4AF200DB0C0D /* OKItemView.swift */; };
 		957A0762250E4DB000DB0C0D /* InfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957A0761250E4DB000DB0C0D /* InfoVC.swift */; };
 		957A0764250E4DC000DB0C0D /* OverviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957A0763250E4DC000DB0C0D /* OverviewVC.swift */; };
-		957A0766250E4DCE00DB0C0D /* ButtonsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957A0765250E4DCE00DB0C0D /* ButtonsVC.swift */; };
 		95AD31EA250F9CFC00C8E1E6 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AD31E9250F9CFC00C8E1E6 /* SearchVC.swift */; };
 		95AD31EE250FE60D00C8E1E6 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AD31ED250FE60D00C8E1E6 /* SearchTableViewCell.swift */; };
 		DE90B9A526FE2CC5B19EA674 /* Pods_OKTunes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C53DE7BE894CF5AB396A44 /* Pods_OKTunes.framework */; };
@@ -66,7 +65,6 @@
 		957A075C250E4AF200DB0C0D /* OKItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKItemView.swift; sourceTree = "<group>"; };
 		957A0761250E4DB000DB0C0D /* InfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoVC.swift; sourceTree = "<group>"; };
 		957A0763250E4DC000DB0C0D /* OverviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewVC.swift; sourceTree = "<group>"; };
-		957A0765250E4DCE00DB0C0D /* ButtonsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsVC.swift; sourceTree = "<group>"; };
 		95AD31E9250F9CFC00C8E1E6 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		95AD31ED250FE60D00C8E1E6 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		CFC78486F244E4350867D4FD /* Pods-OKTunes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OKTunes.debug.xcconfig"; path = "Target Support Files/Pods-OKTunes/Pods-OKTunes.debug.xcconfig"; sourceTree = "<group>"; };
@@ -253,7 +251,6 @@
 			children = (
 				957A0761250E4DB000DB0C0D /* InfoVC.swift */,
 				957A0763250E4DC000DB0C0D /* OverviewVC.swift */,
-				957A0765250E4DCE00DB0C0D /* ButtonsVC.swift */,
 			);
 			path = ItemInfoVCs;
 			sourceTree = "<group>";
@@ -399,7 +396,6 @@
 				955EDBA9250C2B070079599E /* OKSecondaryTitleLabel.swift in Sources */,
 				955EDBA1250BEB180079599E /* FetchModel.swift in Sources */,
 				955EDB9D250BE5190079599E /* UIView+Ext.swift in Sources */,
-				957A0766250E4DCE00DB0C0D /* ButtonsVC.swift in Sources */,
 				957A075D250E4AF200DB0C0D /* OKItemView.swift in Sources */,
 				957A0762250E4DB000DB0C0D /* InfoVC.swift in Sources */,
 				955EDB91250BB4800079599E /* MovieVC.swift in Sources */,

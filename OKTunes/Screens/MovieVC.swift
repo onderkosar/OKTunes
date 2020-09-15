@@ -70,6 +70,7 @@ extension MovieVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let destinationVC       = ItemInfoVC()
         destinationVC.result    = resultsArray[indexPath.row]
+        destinationVC.isMovie   = true
         
         present(destinationVC, animated: true, completion: nil)
     }

@@ -33,7 +33,7 @@ class InfoVC: UIViewController {
     
     func configureElements() {
         movieLbl.text       = result.trackName
-        directorLbl.text    = "Director: " + (result.artistName ?? "NA")
+        directorLbl.text    = result.artistName ?? "NA"
         releaseDateLbl.text = "Rel Date: " + result.date
     }
     
