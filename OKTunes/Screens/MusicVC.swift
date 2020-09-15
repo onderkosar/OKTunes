@@ -13,10 +13,11 @@ class MusicVC: OKDataLoadingVC {
     var musicsCollectionView: UICollectionView!
     var resultsArray: [AllResults] = []
     
+    var pushedBySearchVC = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemYellow
+        view.backgroundColor = .darkGray
         configureCollectionView()
         getItunes()
     }
@@ -28,16 +29,17 @@ class MusicVC: OKDataLoadingVC {
         musicsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         musicsCollectionView.delegate         = self
         musicsCollectionView.dataSource       = self
-        musicsCollectionView.backgroundColor  = .darkGray
+        musicsCollectionView.backgroundColor  = .clear
         
         view.addSubview(musicsCollectionView)
+        musicsCollectionView.pinToEdges(of: view, by: 2)
     }
     
     func getItunes() {
         showLoadingView()
         NetworkManager.shared.fetch(from: URLStrings.musics) { (musics: FetchModel) in
             self.dismissLoadingView()
-            self.resultsArray.append(contentsOf: musics.results)
+            if !self.pushedBySearchVC { self.resultsArray.append(contentsOf: musics.results) }
             self.updateUI()
         }
     }
