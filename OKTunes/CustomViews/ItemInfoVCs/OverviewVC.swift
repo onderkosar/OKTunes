@@ -9,7 +9,6 @@
 import UIKit
 
 class OverviewVC: UIViewController {
-    let titleLbl        = OKTitleLabel(textAlignment: .left, fontSize: 16)
     let descriptionLbl  = OKSecondaryTitleLabel(fontSize: 16)
     
     var result: AllResults!
@@ -25,14 +24,12 @@ class OverviewVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureLayout()
+        configure()
         configureElements()
     }
     
     
-    func configureElements() {
-        titleLbl.text                               = "Long description;"
-        
+    private func configureElements() {
         descriptionLbl.text                         = result.longDescription
         descriptionLbl.adjustsFontSizeToFitWidth    = true
         descriptionLbl.minimumScaleFactor           = 0.6
@@ -40,19 +37,14 @@ class OverviewVC: UIViewController {
         descriptionLbl.numberOfLines                = 50
     }
     
-    func configureLayout() {
-        view.addSubviews(titleLbl, descriptionLbl)
+    private func configure() {
+        view.addSubviews(descriptionLbl)
         
         NSLayoutConstraint.activate([
-            titleLbl.topAnchor.constraint(equalTo: view.topAnchor, constant: 5),
-            titleLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
-            titleLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
-            titleLbl.heightAnchor.constraint(lessThanOrEqualToConstant: 18),
-            
-            descriptionLbl.topAnchor.constraint(equalTo: titleLbl.bottomAnchor, constant: 5),
+            descriptionLbl.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             descriptionLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
             descriptionLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
-            descriptionLbl.heightAnchor.constraint(lessThanOrEqualToConstant: 260)
+            descriptionLbl.heightAnchor.constraint(lessThanOrEqualToConstant: 500)
         ])
     }
 }

@@ -7,7 +7,10 @@
 //
 
 import UIKit
+import AVFoundation
+import AVKit
 
+var audioPlayer = AVPlayer()
 
 class MusicVC: OKDataLoadingVC {
     var musicsCollectionView: UICollectionView!
@@ -19,20 +22,27 @@ class MusicVC: OKDataLoadingVC {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
         configureCollectionView()
+        configure()
         getItunes()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        audioPlayer.pause()
+    }
     
-    func configureCollectionView() {
+    
+    private func configure() {
+        view.addSubview(musicsCollectionView)
+        musicsCollectionView.pinToEdges(of: view, by: 5)
+    }
+    
+    private func configureCollectionView() {
         musicsCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
         musicsCollectionView.register(MusicCell.self, forCellWithReuseIdentifier: MusicCell.reuseID)
         musicsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         musicsCollectionView.delegate         = self
         musicsCollectionView.dataSource       = self
         musicsCollectionView.backgroundColor  = .clear
-        
-        view.addSubview(musicsCollectionView)
-        musicsCollectionView.pinToEdges(of: view, by: 2)
     }
     
     func getItunes() {
@@ -53,7 +63,7 @@ class MusicVC: OKDataLoadingVC {
 
 extension MusicVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 110)
+        return CGSize(width: (view.frame.width - 10), height: 100)
     }
 }
 
@@ -65,15 +75,33 @@ extension MusicVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MusicCell.reuseID, for: indexPath) as! MusicCell
-        cell.set(with: resultsArray[indexPath.row])
+        cell.set(with: resultsArray[indexPath.row], delegate: self)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let destinationVC       = ItemInfoVC()
-        destinationVC.result    = resultsArray[indexPath.row]
-        destinationVC.isMovie   = false
-        
-        present(destinationVC, animated: true, completion: nil)
+        if let url = URL(string: resultsArray[indexPath.row].trackViewUrl!) {
+            UIApplication.shared.open(url)
+        }
     }
+}
+
+extension MusicVC: MusicPreviewDelegate {
+    func playPreview(urlStr: String) {
+        audioPlayerSetup(urlString: urlStr)
+        audioPlayer.play()
+    }
+    
+    func pausePreview() {
+        audioPlayer.pause()
+    }
+    
+    private func audioPlayerSetup(urlString: String) {
+        guard let url = URL(string: urlString) else {
+            print("error to get the mp3 file")
+            return
+        }
+        audioPlayer = AVPlayer(url: url)
+    }
+    
 }

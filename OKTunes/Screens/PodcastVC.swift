@@ -16,21 +16,29 @@ class PodcastVC: OKDataLoadingVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemYellow
+        view.backgroundColor = .darkGray
         configureCollectionView()
+        configure()
         getItunes()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        audioPlayer.pause()
+    }
     
-    func configureCollectionView() {
+    
+    private func configure() {
+        view.addSubview(podcastsCollectionView)
+        podcastsCollectionView.pinToEdges(of: view, by: 5)
+    }
+    
+    private func configureCollectionView() {
         podcastsCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
         podcastsCollectionView.register(PodcastCell.self, forCellWithReuseIdentifier: PodcastCell.reuseID)
         podcastsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         podcastsCollectionView.delegate         = self
         podcastsCollectionView.dataSource       = self
-        podcastsCollectionView.backgroundColor  = .darkGray
-        
-        view.addSubview(podcastsCollectionView)
+        podcastsCollectionView.backgroundColor  = .clear
     }
     
     func getItunes() {
@@ -51,7 +59,7 @@ class PodcastVC: OKDataLoadingVC {
 
 extension PodcastVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 110)
+        return CGSize(width: (view.frame.width - 10), height: 100)
     }
 }
 

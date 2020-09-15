@@ -16,16 +16,12 @@ class ItemInfoVC: OKDataLoadingVC {
     
     let posterImgView   = OKImageView(content: .scaleAspectFit)
     let infoView        = OKItemView(color: .clear, cornerRadius: 10, borderWidth: 2)
-    let overviewView    = OKItemView(color: .clear, cornerRadius: 10, borderWidth: 2)
+    let overviewView    = UIView()
     
     let playBtn         = OKButton(backgroundColor: .clear, title: "")
-    let stopBtn         = OKButton(backgroundColor: .clear, title: "")
     let iTunesBtn       = OKButton(backgroundColor: .darkGray, title: "iTunes Store")
-    
-    var audioPlayer     = AVAudioPlayer()
+
     var videoPlayer     = AVPlayer()
-    
-    var isMovie         = true
     
     var result: AllResults!
 
@@ -33,34 +29,39 @@ class ItemInfoVC: OKDataLoadingVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray
-        configureViewLayout()
-        configureContentViewLayout()
+        configure()
+        configureContentView()
         configureUIElements()
+        configureButtons()
     }
     
-    private func configureViewLayout() {
+    override func viewWillAppear(_ animated: Bool) {
+        audioPlayer.pause()
+    }
+    
+    
+    private func configure() {
         view.addSubview(contentView)
         contentView.pinToEdges(of: view, by: 15)
     }
     
-    private func configureContentViewLayout() {
-        contentView.addSubviews(posterImgView, infoView, overviewView, playBtn, stopBtn, iTunesBtn)
+    private func configureContentView() {
+        contentView.addSubviews(posterImgView, infoView, overviewView, playBtn, iTunesBtn)
         
+        let posterHeight: CGFloat   = 140
+        let posterWidth: CGFloat    = posterHeight * 27 / 40
         let padding: CGFloat        = 10
         
         NSLayoutConstraint.activate([
             posterImgView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
             posterImgView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            posterImgView.widthAnchor.constraint(equalToConstant: posterWidth),
+            posterImgView.heightAnchor.constraint(equalToConstant: posterHeight),
             
             playBtn.centerXAnchor.constraint(equalTo: posterImgView.centerXAnchor),
             playBtn.centerYAnchor.constraint(equalTo: posterImgView.centerYAnchor),
-            playBtn.widthAnchor.constraint(equalToConstant: 60),
-            playBtn.heightAnchor.constraint(equalToConstant: 60),
-            
-            stopBtn.centerXAnchor.constraint(equalTo: posterImgView.centerXAnchor),
-            stopBtn.centerYAnchor.constraint(equalTo: posterImgView.centerYAnchor),
-            stopBtn.widthAnchor.constraint(equalToConstant: 60),
-            stopBtn.heightAnchor.constraint(equalToConstant: 60),
+            playBtn.widthAnchor.constraint(equalToConstant: posterWidth - 10),
+            playBtn.heightAnchor.constraint(equalToConstant: posterWidth - 10),
             
             infoView.topAnchor.constraint(equalTo: posterImgView.topAnchor),
             infoView.leadingAnchor.constraint(equalTo: posterImgView.trailingAnchor, constant: padding),
@@ -76,52 +77,28 @@ class ItemInfoVC: OKDataLoadingVC {
             iTunesBtn.widthAnchor.constraint(equalToConstant: 120),
             iTunesBtn.heightAnchor.constraint(equalToConstant: 40),
             iTunesBtn.bottomAnchor.constraint(equalTo: posterImgView.bottomAnchor)
-            
         ])
-        
-        if !isMovie {
-            overviewView.isHidden = true
-            NSLayoutConstraint.activate([
-                posterImgView.widthAnchor.constraint(equalToConstant: 140),
-                posterImgView.heightAnchor.constraint(equalToConstant: 140)
-            ])
-            audioPlayerSetup()
-        } else {
-            let posterHeight: CGFloat   = 140
-            let posterWidth: CGFloat    = posterHeight * 27 / 40
-            
-            NSLayoutConstraint.activate([
-                posterImgView.widthAnchor.constraint(equalToConstant: posterWidth),
-                posterImgView.heightAnchor.constraint(equalToConstant: posterHeight),
-            ])
-            
-        }
     }
     
-    func configureUIElements() {
+    private func configureUIElements() {
         posterImgView.downloadImage(fromURL: URL(string: result.artworkUrl100!)!)
-        
-        playBtn.addTarget(self, action: #selector(playBtnPressed), for: .touchUpInside)
-        stopBtn.addTarget(self, action: #selector(stopBtnPressed), for: .touchUpInside)
-        iTunesBtn.addTarget(self, action: #selector(iTunesBtnPressed), for: .touchUpInside)
+        posterImgView.alpha = 0.8
         
         add(childVC: InfoVC(model: result), to: infoView)
         add(childVC: OverviewVC(model: result), to: overviewView)
-        
-        posterImgView.alpha = 0.8
-        playBtn.tintColor   = .black
-        stopBtn.tintColor   = .lightGray
-        
-        iTunesBtn.setBackgroundImage(SFSymbols.iTunes, for: .normal)
-        iTunesBtn.layer.borderWidth   = 2
-        iTunesBtn.layer.borderColor   = UIColor.lightGray.cgColor
+    }
+    
+    private func configureButtons() {
+        playBtn.addTarget(self, action: #selector(playBtnPressed), for: .touchUpInside)
+        iTunesBtn.addTarget(self, action: #selector(iTunesBtnPressed), for: .touchUpInside)
         
         playBtn.setBackgroundImage(SFSymbols.play, for: .normal)
-        stopBtn.setBackgroundImage(SFSymbols.pause, for: .normal)
+        iTunesBtn.setBackgroundImage(SFSymbols.iTunes, for: .normal)
         
-        playBtn.isHidden = false
-        stopBtn.isHidden = true
-        
+        playBtn.tintColor           = .black
+        playBtn.alpha               = 0.4
+        iTunesBtn.layer.borderWidth = 2
+        iTunesBtn.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     func add(childVC: UIViewController, to containerView: UIView) {
@@ -144,39 +121,9 @@ class ItemInfoVC: OKDataLoadingVC {
         }
     }
     
-    private func audioPlayerSetup() {
-        if let url = URL(string: result.previewUrl!) {
-            do {
-                let songData = try NSData(contentsOf: url, options: NSData.ReadingOptions.mappedIfSafe)
-                try AVAudioSession.sharedInstance().setCategory(.playback)
-                try AVAudioSession.sharedInstance().setActive(true)
-                
-                audioPlayer = try AVAudioPlayer(data: songData as Data, fileTypeHint: AVFileType.mp3.rawValue)
-                
-                audioPlayer.prepareToPlay()
-            } catch { print(error) }
-        }
-    }
-    
     @objc func playBtnPressed() {
-        
-        if isMovie {
-            videoPlayerSetup()
-            videoPlayer.play()
-        } else {
-            playBtn.isHidden = true
-            stopBtn.isHidden = false
-            audioPlayer.stop()
-            audioPlayer.play()
-        }
-        
-    }
-    
-    @objc func stopBtnPressed() {
-        playBtn.isHidden = false
-        stopBtn.isHidden = true
-        audioPlayer.stop()
-        audioPlayer.stop()
+        videoPlayerSetup()
+        videoPlayer.play()
     }
     
     @objc func iTunesBtnPressed() {

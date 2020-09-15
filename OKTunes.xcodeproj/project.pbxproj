@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9503379C251153AD002CE231 /* MusicPreviewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9503379B251153AC002CE231 /* MusicPreviewDelegate.swift */; };
 		9507856D250D5D0A006D9A0A /* ItemInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9507856C250D5D0A006D9A0A /* ItemInfoVC.swift */; };
 		95078575250D8D13006D9A0A /* OKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95078574250D8D13006D9A0A /* OKButton.swift */; };
 		955255A5250CED7F00C8A558 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955255A4250CED7F00C8A558 /* MovieCell.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		21B4D2B21040BBE6363D51FA /* Pods-OKTunes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OKTunes.release.xcconfig"; path = "Target Support Files/Pods-OKTunes/Pods-OKTunes.release.xcconfig"; sourceTree = "<group>"; };
 		28C53DE7BE894CF5AB396A44 /* Pods_OKTunes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OKTunes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9503379B251153AC002CE231 /* MusicPreviewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPreviewDelegate.swift; sourceTree = "<group>"; };
 		9507856C250D5D0A006D9A0A /* ItemInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInfoVC.swift; sourceTree = "<group>"; };
 		95078574250D8D13006D9A0A /* OKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKButton.swift; sourceTree = "<group>"; };
 		955255A4250CED7F00C8A558 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				955EDB9E250BEAAA0079599E /* NetworkManager.swift */,
+				9503379B251153AC002CE231 /* MusicPreviewDelegate.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				955EDBA7250C29460079599E /* OKTitleLabel.swift in Sources */,
 				95AD31EE250FE60D00C8E1E6 /* SearchTableViewCell.swift in Sources */,
 				95078575250D8D13006D9A0A /* OKButton.swift in Sources */,
+				9503379C251153AD002CE231 /* MusicPreviewDelegate.swift in Sources */,
 				957A0764250E4DC000DB0C0D /* OverviewVC.swift in Sources */,
 				955EDB8D250BB44E0079599E /* OKTabBarController.swift in Sources */,
 				955255A5250CED7F00C8A558 /* MovieCell.swift in Sources */,

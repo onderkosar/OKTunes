@@ -9,7 +9,7 @@
 import UIKit
 
 class InfoVC: UIViewController {
-    let movieLbl        = OKTitleLabel(textAlignment: .left, fontSize: 18)
+    let movieTitleLbl   = OKTitleLabel(textAlignment: .left, fontSize: 18)
     let directorLbl     = OKSecondaryTitleLabel(fontSize: 15)
     let releaseDateLbl  = OKSecondaryTitleLabel(fontSize: 12)
     
@@ -26,27 +26,34 @@ class InfoVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureLayout()
+        configure()
         configureElements()
+        set()
     }
     
     
-    func configureElements() {
-        movieLbl.text       = result.trackName
-        directorLbl.text    = result.artistName ?? "NA"
-        releaseDateLbl.text = "Rel Date: " + result.date
+    private func configureElements() {
+        movieTitleLbl.adjustsFontSizeToFitWidth = true
+        movieTitleLbl.numberOfLines             = 2
+        movieTitleLbl.minimumScaleFactor        = 0.7
     }
     
-    func configureLayout() {
-        view.addSubviews(movieLbl, directorLbl, releaseDateLbl)
+    private func set() {
+        movieTitleLbl.text                      = result.trackName
+        directorLbl.text                        = result.artistName ?? "NA"
+        releaseDateLbl.text                     = "Rel Date: " + result.date
+    }
+    
+    private func configure() {
+        view.addSubviews(movieTitleLbl, directorLbl, releaseDateLbl)
         
         NSLayoutConstraint.activate([
-            movieLbl.topAnchor.constraint(equalTo: view.topAnchor, constant: 5),
-            movieLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
-            movieLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
-            movieLbl.heightAnchor.constraint(equalToConstant: 20),
+            movieTitleLbl.topAnchor.constraint(equalTo: view.topAnchor, constant: 5),
+            movieTitleLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
+            movieTitleLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
+            movieTitleLbl.heightAnchor.constraint(equalToConstant: 30),
             
-            directorLbl.topAnchor.constraint(equalTo: movieLbl.bottomAnchor, constant: 2),
+            directorLbl.topAnchor.constraint(equalTo: movieTitleLbl.bottomAnchor, constant: 2),
             directorLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
             directorLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
             directorLbl.heightAnchor.constraint(equalToConstant: 17),

@@ -12,13 +12,14 @@ class MovieCell: UICollectionViewCell {
     static let reuseID  = "movieCell"
     
     let artworkImgView  = OKImageView(content: .scaleAspectFit)
-    let movieLbl        = OKTitleLabel(textAlignment: .left, fontSize: 20)
+    let movieLbl        = OKTitleLabel(textAlignment: .left, fontSize: 18)
     let directorLbl     = OKSecondaryTitleLabel(fontSize: 18)
     let releaseDateLbl  = OKSecondaryTitleLabel(fontSize: 15)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
+        configureElements()
     }
     
     required init?(coder: NSCoder) {
@@ -35,13 +36,8 @@ class MovieCell: UICollectionViewCell {
     
     private func configure() {
         addSubviews(artworkImgView, movieLbl, releaseDateLbl, directorLbl)
-        artworkImgView.backgroundColor  = .clear
-        movieLbl.backgroundColor        = .clear
-        directorLbl.backgroundColor     = .clear
-        releaseDateLbl.backgroundColor  = .clear
-        releaseDateLbl.alpha            = 0.7
         
-        let imgHeight: CGFloat  = 100
+        let imgHeight: CGFloat  = contentView.frame.height - 5
         let imgWidth: CGFloat   = imgHeight * 27 / 40
 
         NSLayoutConstraint.activate([
@@ -50,20 +46,28 @@ class MovieCell: UICollectionViewCell {
             artworkImgView.widthAnchor.constraint(equalToConstant: imgWidth),
             artworkImgView.heightAnchor.constraint(equalToConstant: imgHeight),
             
-            movieLbl.topAnchor.constraint(equalTo: artworkImgView.topAnchor, constant: 2),
-            movieLbl.leadingAnchor.constraint(equalTo: artworkImgView.trailingAnchor, constant: 10),
-            movieLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            movieLbl.heightAnchor.constraint(equalToConstant: 22),
+            movieLbl.topAnchor.constraint(equalTo: artworkImgView.topAnchor),
+            movieLbl.leadingAnchor.constraint(equalTo: artworkImgView.trailingAnchor, constant: 5),
+            movieLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
+            movieLbl.heightAnchor.constraint(equalToConstant: 20),
             
             directorLbl.topAnchor.constraint(equalTo: movieLbl.bottomAnchor, constant: 2),
-            directorLbl.leadingAnchor.constraint(equalTo: artworkImgView.trailingAnchor, constant: 10),
-            directorLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            directorLbl.leadingAnchor.constraint(equalTo: artworkImgView.trailingAnchor, constant: 5),
+            directorLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
             directorLbl.heightAnchor.constraint(equalToConstant: 20),
             
             releaseDateLbl.bottomAnchor.constraint(equalTo: artworkImgView.bottomAnchor, constant: -2),
-            releaseDateLbl.leadingAnchor.constraint(equalTo: artworkImgView.trailingAnchor, constant: 10),
-            releaseDateLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            releaseDateLbl.heightAnchor.constraint(equalToConstant: 20),
+            releaseDateLbl.leadingAnchor.constraint(equalTo: artworkImgView.trailingAnchor, constant: 5),
+            releaseDateLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
+            releaseDateLbl.heightAnchor.constraint(equalToConstant: 17),
         ])
+    }
+    
+    private func configureElements() {
+        artworkImgView.backgroundColor  = .clear
+        movieLbl.backgroundColor        = .clear
+        directorLbl.backgroundColor     = .clear
+        releaseDateLbl.backgroundColor  = .clear
+        releaseDateLbl.alpha            = 0.7
     }
 }

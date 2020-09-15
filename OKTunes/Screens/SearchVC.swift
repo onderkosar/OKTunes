@@ -25,15 +25,19 @@ class SearchVC: OKDataLoadingVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
-        configureLayout()
+        configure()
         configureSegControl()
         configureTableView()
         configureSearchBar()
         searchBarFunc()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        audioPlayer.pause()
+    }
     
-    private func configureLayout() {
+    
+    private func configure() {
         view.addSubviews(segmentedControl, tableView)
         
         NSLayoutConstraint.activate([
@@ -77,7 +81,7 @@ class SearchVC: OKDataLoadingVC {
             .rx
             .text
             .orEmpty
-            .throttle(0.3, scheduler: MainScheduler.instance)
+            .throttle(.milliseconds(300), scheduler: MainScheduler.instance)
             .filter { $0.count > 2 }
             .subscribe(onNext: { [weak self ](text) in
                 guard let strongSelf = self else { return }

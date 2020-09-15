@@ -16,21 +16,29 @@ class MovieVC: OKDataLoadingVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemOrange
+        view.backgroundColor = .darkGray
         configureCollectionView()
+        configure()
         getItunes()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        audioPlayer.pause()
+    }
     
-    func configureCollectionView() {
+    
+    private func configure() {
+        view.addSubview(moviesCollectionView)
+        moviesCollectionView.pinToEdges(of: view, by: 5)
+    }
+    
+    private func configureCollectionView() {
         moviesCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
         moviesCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseID)
         moviesCollectionView.translatesAutoresizingMaskIntoConstraints = false
         moviesCollectionView.delegate         = self
         moviesCollectionView.dataSource       = self
-        moviesCollectionView.backgroundColor  = .darkGray
-        
-        view.addSubview(moviesCollectionView)
+        moviesCollectionView.backgroundColor  = .clear
     }
     
     func getItunes() {
@@ -51,7 +59,7 @@ class MovieVC: OKDataLoadingVC {
 
 extension MovieVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 110)
+        return CGSize(width: (view.frame.width - 10), height: 100)
     }
 }
 
@@ -70,7 +78,6 @@ extension MovieVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let destinationVC       = ItemInfoVC()
         destinationVC.result    = resultsArray[indexPath.row]
-        destinationVC.isMovie   = true
         
         present(destinationVC, animated: true, completion: nil)
     }
