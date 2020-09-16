@@ -62,11 +62,12 @@ class SearchVC: OKDataLoadingVC {
     }
     
     private func configureTableView() {
-        tableView.frame             = view.bounds
-        tableView.separatorStyle    = .none
-        tableView.rowHeight         = 40
-        tableView.delegate          = self
-        tableView.dataSource        = self
+        tableView.frame                 = view.bounds
+        tableView.separatorStyle        = .none
+        tableView.rowHeight             = 40
+        tableView.delegate              = self
+        tableView.dataSource            = self
+        tableView.keyboardDismissMode   = .onDrag
         
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.reuseID)
     }
@@ -74,6 +75,7 @@ class SearchVC: OKDataLoadingVC {
     private func configureSearchBar() {
         searchBar.sizeToFit()
         searchBar.placeholder       = NSLocalizedString("search musics by artist name", comment: "")
+        searchBar.showsCancelButton = true
         navigationItem.titleView    = searchBar
     }
     
@@ -87,6 +89,14 @@ class SearchVC: OKDataLoadingVC {
             .subscribe(onNext: { [weak self ](text) in
                 guard let strongSelf = self else { return }
                 strongSelf.searchItunes(text: text)
+            }).disposed(by: disposebag)
+        
+        self.searchBar
+            .rx
+            .cancelButtonClicked
+            .subscribe(onNext: { [weak self ](text) in
+                guard let strongSelf = self else { return }
+                strongSelf.searchBar.endEditing(true)
             }).disposed(by: disposebag)
         
         self.searchBar
@@ -175,9 +185,11 @@ extension SearchVC: UITableViewDataSource, UITableViewDelegate {
             
             NetworkManager.shared.fetch(from: urlString) { (model: FetchModel) in
                 destinationVC.resultsArray.append(contentsOf: model.results)
+                
+                DispatchQueue.main.async {
+                    self.view.window?.rootViewController?.present(destinationVC, animated: true, completion: nil)
+                }
             }
-            
-            view.window?.rootViewController?.present(destinationVC, animated: true, completion: nil)
         }
     }
 }
