@@ -18,7 +18,7 @@ class ItemInfoVC: OKDataLoadingVC {
     let infoView        = OKItemView(color: .clear, cornerRadius: 10, borderWidth: 2)
     let overviewView    = UIView()
     
-    let playBtn         = OKPlayButton(topInset: -110, leftInset: -65)
+    var playBtn         = OKPlayButton()
     let iTunesBtn       = OKButton(backgroundColor: .darkGray, title: "iTunes Store")
 
     var videoPlayer     = AVPlayer()
@@ -29,6 +29,7 @@ class ItemInfoVC: OKDataLoadingVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray
+        configurePlayBtnInsets()
         configure()
         configureContentView()
         configureUIElements()
@@ -81,6 +82,12 @@ class ItemInfoVC: OKDataLoadingVC {
         
         add(childVC: InfoVC(model: result), to: infoView)
         add(childVC: OverviewVC(model: result), to: overviewView)
+    }
+    
+    private func configurePlayBtnInsets() {
+        let btnTopInset     = posterImgView.frame.height + 110
+        let btnLeftInset    = posterImgView.frame.height + 65
+        playBtn             = OKPlayButton(topInset: -btnTopInset, leftInset: -btnLeftInset)
     }
     
     private func configureButtons() {

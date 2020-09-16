@@ -29,10 +29,11 @@ class OKPlayButton: UIButton {
         translatesAutoresizingMaskIntoConstraints = false
         setImage(SFSymbols.play, for: .normal)
         
-        backgroundColor             = .clear
-        alpha                       = 0.8
-        tintColor                   = .black
-        clipsToBounds               = true
-        imageView?.backgroundColor  = .white
+        backgroundColor                 = .clear
+        alpha                           = 0.8
+        tintColor                       = .black
+        clipsToBounds                   = true
+        imageView?.backgroundColor      = .white
+        imageView?.layer.cornerRadius   = 4
     }
 }

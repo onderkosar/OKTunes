@@ -16,8 +16,8 @@ class MusicCell: UICollectionViewCell {
     let albumLbl        = OKSecondaryTitleLabel(fontSize: 18)
     let artistLbl       = OKSecondaryTitleLabel(fontSize: 15)
     
-    let playBtn         = OKPlayButton(topInset: -52, leftInset: -52)
-    let pauseBtn        = OKPlayButton(topInset: -52, leftInset: -52)
+    var playBtn         = OKPlayButton()
+    var pauseBtn        = OKPlayButton()
     
     var delegate: MusicPreviewDelegate?
     
@@ -25,6 +25,7 @@ class MusicCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configurePlayBtnInsets()
         configure()
         configureElements()
     }
@@ -83,6 +84,12 @@ class MusicCell: UICollectionViewCell {
         
         playBtn.isHidden    = false
         pauseBtn.isHidden   = true
+    }
+    
+    private func configurePlayBtnInsets() {
+        let btnInset        = frame.height - 30
+        playBtn             = OKPlayButton(topInset: -btnInset, leftInset: -btnInset)
+        pauseBtn            = OKPlayButton(topInset: -btnInset, leftInset: -btnInset)
     }
     
     @objc func playBtnPressed() {
