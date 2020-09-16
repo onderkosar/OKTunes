@@ -18,7 +18,7 @@ class ItemInfoVC: OKDataLoadingVC {
     let infoView        = OKItemView(color: .clear, cornerRadius: 10, borderWidth: 2)
     let overviewView    = UIView()
     
-    let playBtn         = OKButton(backgroundColor: .clear, title: "")
+    let playBtn         = OKPlayButton(topInset: -110, leftInset: -65)
     let iTunesBtn       = OKButton(backgroundColor: .darkGray, title: "iTunes Store")
 
     var videoPlayer     = AVPlayer()
@@ -88,12 +88,6 @@ class ItemInfoVC: OKDataLoadingVC {
         iTunesBtn.addTarget(self, action: #selector(iTunesBtnPressed), for: .touchUpInside)
         
         playBtn.pinToEdges(of: posterImgView, by: 0)
-        playBtn.tintColor        = .darkGray
-        playBtn.clipsToBounds    = true
-        
-        playBtn.setImage(SFSymbols.play, for: .normal)
-        playBtn.imageView?.layer.cornerRadius    = (playBtn.imageView?.frame.size.height)! / 2
-        playBtn.imageView?.backgroundColor       = .lightGray
         
         iTunesBtn.layer.borderWidth = 2
         iTunesBtn.layer.borderColor = UIColor.lightGray.cgColor

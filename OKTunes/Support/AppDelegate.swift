@@ -15,6 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window : UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        UINavigationBar.appearance().tintColor  = .black
+        UITabBar.appearance().tintColor         = .black
+        
         self.window                         = UIWindow()
         self.window!.rootViewController     = OKTabBarController()
         self.window!.makeKeyAndVisible()

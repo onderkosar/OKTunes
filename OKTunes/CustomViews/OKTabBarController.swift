@@ -14,8 +14,7 @@ class OKTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UITabBar.appearance().tintColor     = .systemOrange
-        viewControllers                     = [createMusicNC(), createPodcastNC(), createMovieNC(), createSearchNC()]
+        viewControllers         = [createMusicNC(), createPodcastNC(), createMovieNC(), createSearchNC()]
     }
     
     

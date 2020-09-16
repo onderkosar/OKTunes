@@ -16,8 +16,8 @@ class MusicCell: UICollectionViewCell {
     let albumLbl        = OKSecondaryTitleLabel(fontSize: 18)
     let artistLbl       = OKSecondaryTitleLabel(fontSize: 15)
     
-    let playBtn         = OKButton(backgroundColor: .clear, title: "")
-    let pauseBtn        = OKButton(backgroundColor: .clear, title: "")
+    let playBtn         = OKPlayButton(topInset: -52, leftInset: -52)
+    let pauseBtn        = OKPlayButton(topInset: -52, leftInset: -52)
     
     var delegate: MusicPreviewDelegate?
     
@@ -26,7 +26,6 @@ class MusicCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
-        configureButtons()
         configureElements()
     }
     
@@ -73,29 +72,17 @@ class MusicCell: UICollectionViewCell {
         ])
     }
     
-    private func configureButtons() {
-        let buttons = [playBtn, pauseBtn]
-        
-        for button in buttons {
-            button.adjustsImageWhenHighlighted = false
-            button.pinToEdges(of: artworkImgView, by: 0)
-            button.tintColor        = .black
-            button.clipsToBounds    = true
-            
-            button.setImage(SFSymbols.play, for: .normal)
-            button.imageView?.layer.cornerRadius    = (button.imageView?.frame.size.height)! / 2
-            button.imageView?.backgroundColor       = .white
-        }
-    }
-    
     private func configureElements() {
+        playBtn.addTarget(self, action: #selector(playBtnPressed), for: .touchUpInside)
+        pauseBtn.addTarget(self, action: #selector(pauseBtnPressed), for: .touchUpInside)
+        
+        playBtn.pinToEdges(of: artworkImgView, by: 0)
+        pauseBtn.pinToEdges(of: artworkImgView, by: 0)
+        
         artistLbl.alpha     = 0.7
         
         playBtn.isHidden    = false
         pauseBtn.isHidden   = true
-        
-        playBtn.addTarget(self, action: #selector(playBtnPressed), for: .touchUpInside)
-        pauseBtn.addTarget(self, action: #selector(pauseBtnPressed), for: .touchUpInside)
     }
     
     @objc func playBtnPressed() {

@@ -34,6 +34,7 @@
 		957A0764250E4DC000DB0C0D /* OverviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957A0763250E4DC000DB0C0D /* OverviewVC.swift */; };
 		95AD31EA250F9CFC00C8E1E6 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AD31E9250F9CFC00C8E1E6 /* SearchVC.swift */; };
 		95AD31EE250FE60D00C8E1E6 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AD31ED250FE60D00C8E1E6 /* SearchTableViewCell.swift */; };
+		95EA628F251277130085D803 /* OKPlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EA628E251277130085D803 /* OKPlayButton.swift */; };
 		DE90B9A526FE2CC5B19EA674 /* Pods_OKTunes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C53DE7BE894CF5AB396A44 /* Pods_OKTunes.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,7 @@
 		957A0763250E4DC000DB0C0D /* OverviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewVC.swift; sourceTree = "<group>"; };
 		95AD31E9250F9CFC00C8E1E6 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		95AD31ED250FE60D00C8E1E6 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		95EA628E251277130085D803 /* OKPlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKPlayButton.swift; sourceTree = "<group>"; };
 		CFC78486F244E4350867D4FD /* Pods-OKTunes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OKTunes.debug.xcconfig"; path = "Target Support Files/Pods-OKTunes/Pods-OKTunes.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				95078574250D8D13006D9A0A /* OKButton.swift */,
+				95EA628E251277130085D803 /* OKPlayButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				955EDB91250BB4800079599E /* MovieVC.swift in Sources */,
 				955EDB93250BB53D0079599E /* Constants.swift in Sources */,
 				955EDB72250BAEBB0079599E /* AppDelegate.swift in Sources */,
+				95EA628F251277130085D803 /* OKPlayButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
