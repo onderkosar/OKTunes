@@ -26,6 +26,7 @@ class MusicCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
+        configureButtons()
         configureElements()
     }
     
@@ -70,20 +71,20 @@ class MusicCell: UICollectionViewCell {
             artistLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
             artistLbl.heightAnchor.constraint(equalToConstant: 17)
         ])
-        
+    }
+    
+    private func configureButtons() {
         let buttons = [playBtn, pauseBtn]
         
         for button in buttons {
-            button.setBackgroundImage(SFSymbols.play, for: .normal)
-            button.tintColor = .black
-            button.alpha = 0.3
+            button.adjustsImageWhenHighlighted = false
+            button.pinToEdges(of: artworkImgView, by: 0)
+            button.tintColor        = .black
+            button.clipsToBounds    = true
             
-            NSLayoutConstraint.activate([
-                button.centerXAnchor.constraint(equalTo: artworkImgView.centerXAnchor),
-                button.centerYAnchor.constraint(equalTo: artworkImgView.centerYAnchor),
-                button.widthAnchor.constraint(equalToConstant: contentView.frame.height - 15),
-                button.heightAnchor.constraint(equalToConstant: contentView.frame.height - 15),
-            ])
+            button.setImage(SFSymbols.play, for: .normal)
+            button.imageView?.layer.cornerRadius    = (button.imageView?.frame.size.height)! / 2
+            button.imageView?.backgroundColor       = .white
         }
     }
     

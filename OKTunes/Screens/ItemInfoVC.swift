@@ -58,11 +58,6 @@ class ItemInfoVC: OKDataLoadingVC {
             posterImgView.widthAnchor.constraint(equalToConstant: posterWidth),
             posterImgView.heightAnchor.constraint(equalToConstant: posterHeight),
             
-            playBtn.centerXAnchor.constraint(equalTo: posterImgView.centerXAnchor),
-            playBtn.centerYAnchor.constraint(equalTo: posterImgView.centerYAnchor),
-            playBtn.widthAnchor.constraint(equalToConstant: posterWidth - 10),
-            playBtn.heightAnchor.constraint(equalToConstant: posterWidth - 10),
-            
             infoView.topAnchor.constraint(equalTo: posterImgView.topAnchor),
             infoView.leadingAnchor.constraint(equalTo: posterImgView.trailingAnchor, constant: padding),
             infoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
@@ -92,10 +87,14 @@ class ItemInfoVC: OKDataLoadingVC {
         playBtn.addTarget(self, action: #selector(playBtnPressed), for: .touchUpInside)
         iTunesBtn.addTarget(self, action: #selector(iTunesBtnPressed), for: .touchUpInside)
         
-        playBtn.setBackgroundImage(SFSymbols.play, for: .normal)
+        playBtn.pinToEdges(of: posterImgView, by: 0)
+        playBtn.tintColor        = .darkGray
+        playBtn.clipsToBounds    = true
         
-        playBtn.tintColor           = .black
-        playBtn.alpha               = 0.4
+        playBtn.setImage(SFSymbols.play, for: .normal)
+        playBtn.imageView?.layer.cornerRadius    = (playBtn.imageView?.frame.size.height)! / 2
+        playBtn.imageView?.backgroundColor       = .lightGray
+        
         iTunesBtn.layer.borderWidth = 2
         iTunesBtn.layer.borderColor = UIColor.lightGray.cgColor
     }

@@ -41,7 +41,6 @@ class OverviewVC: UIViewController {
         view.addSubviews(descriptionLbl)
         
         let height = view.frame.height
-        print(height)
         
         NSLayoutConstraint.activate([
             descriptionLbl.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
