@@ -101,10 +101,9 @@ class ItemInfoVC: OKDataLoadingVC {
     
     func add(childVC: UIViewController, to containerView: UIView) {
         addChild(childVC)
-        containerView.addSubview(childVC.view)
-        
-#warning("Console is yelling for constraints!")
         childVC.view.frame = containerView.bounds
+        containerView.addSubviews(childVC.view)
+        childVC.view.pinToEdges(of: containerView, by: 0)
         childVC.didMove(toParent: self)
     }
     
