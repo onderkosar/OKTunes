@@ -9,6 +9,8 @@
 import UIKit
 import AVFoundation
 import AVKit
+import RxSwift
+import RxCocoa
 
 var audioPlayer = AVPlayer()
 
@@ -16,14 +18,13 @@ class MusicVC: OKDataLoadingVC {
     var musicsCollectionView: UICollectionView!
     var resultsArray: [AllResults] = []
     
-    var pushedBySearchVC = false
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
         configureCollectionView()
-        configure()
-        getItunes()
+        configureSubviews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,33 +32,38 @@ class MusicVC: OKDataLoadingVC {
     }
     
     
-    private func configure() {
-        view.addSubview(musicsCollectionView)
+    private func configureSubviews() {
+        view.addSubviews(musicsCollectionView)
         musicsCollectionView.pinToEdges(of: view, by: 5)
     }
     
     private func configureCollectionView() {
         musicsCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
         musicsCollectionView.register(MusicCell.self, forCellWithReuseIdentifier: MusicCell.reuseID)
-        musicsCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        musicsCollectionView.delegate         = self
-        musicsCollectionView.dataSource       = self
+        musicsCollectionView.delegate = self
         musicsCollectionView.backgroundColor  = .clear
+        
+        getModel().flatMap { fetchModel -> Observable<[AllResults]> in
+            self.resultsArray.append(contentsOf: fetchModel.results)
+            return Observable.just(self.resultsArray)
+        }.bind(to: musicsCollectionView.rx.items(cellIdentifier: MusicCell.reuseID, cellType: MusicCell.self)) {
+            index, musics, cell in
+            cell.set(with: musics, delegate: self)
+        }.disposed(by: disposeBag)
+        
+        musicsCollectionView
+            .rx
+            .itemSelected
+            .subscribe(onNext: { [weak self ] (indexPath) in
+                guard let strongSelf = self else { return }
+                if let url = URL(string: strongSelf.resultsArray[indexPath.row].trackViewUrl!) {
+                    UIApplication.shared.open(url)
+                }
+            }).disposed(by: disposeBag)
     }
     
-    func getItunes() {
-        showLoadingView()
-        NetworkManager.shared.fetch(from: URLStrings.musics) { (musics: FetchModel) in
-            self.dismissLoadingView()
-            if !self.pushedBySearchVC { self.resultsArray.append(contentsOf: musics.results) }
-            self.updateUI()
-        }
-    }
-    
-    func updateUI() {
-        DispatchQueue.main.async {
-            self.musicsCollectionView.reloadData()
-        }
+    func getModel() -> Observable<FetchModel> {
+        return NetworkManager.shared.fetch2(from: URLStrings.musics)
     }
 }
 
@@ -69,35 +75,16 @@ extension MusicVC: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension MusicVC: UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return resultsArray.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MusicCell.reuseID, for: indexPath) as! MusicCell
-        cell.set(with: resultsArray[indexPath.row], delegate: self)
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let url = URL(string: resultsArray[indexPath.row].trackViewUrl!) {
-            UIApplication.shared.open(url)
-        }
-    }
-}
-
 extension MusicVC: MusicPreviewDelegate {
     func playPreview(urlStr: String) {
         audioPlayerSetup(urlString: urlStr)
         audioPlayer.play()
     }
-    
+
     func pausePreview() {
         audioPlayer.pause()
     }
-    
+
     private func audioPlayerSetup(urlString: String) {
         guard let url = URL(string: urlString) else {
             print("error to get the mp3 file")
@@ -105,5 +92,5 @@ extension MusicVC: MusicPreviewDelegate {
         }
         audioPlayer = AVPlayer(url: url)
     }
-    
+
 }

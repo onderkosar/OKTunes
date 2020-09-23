@@ -7,12 +7,45 @@
 //
 
 import UIKit
+import RxSwift
 
 class NetworkManager {
     static let shared       = NetworkManager()
     let cache               = NSCache<NSString, UIImage>()
     
     private init() {}
+    
+    func fetch2<Model: Decodable>(from URLString: String) -> Observable<Model> {
+        return Observable.create { observer -> Disposable in
+            let url = URL(string: URLString)
+            
+            let task = URLSession.shared.dataTask(with: url!) { data, response, error in
+                
+                if let _            = error { return }
+                guard let response  = response as? HTTPURLResponse, response.statusCode == 200 else { return }
+                guard let data      = data else { return }
+                
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    
+                    let obj  = try decoder.decode(Model.self, from: data)
+                    
+                    observer.onNext(obj)
+                    observer.onCompleted()
+                    
+                } catch let err {
+                    observer.onError(err)
+                }
+            }
+            
+            task.resume()
+            
+            return Disposables.create {
+                task.cancel()
+            }
+        }
+    }
     
     func fetch<Model: Decodable>(from URLString: String, completed: @escaping (Model) -> ()) {
         guard let url = URL(string: URLString) else {

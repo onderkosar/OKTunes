@@ -7,19 +7,21 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 
 class MovieVC: OKDataLoadingVC {
     var moviesCollectionView: UICollectionView!
     var resultsArray: [AllResults] = []
     
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
         configureCollectionView()
-        configure()
-        getItunes()
+        configureSubviews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -27,33 +29,40 @@ class MovieVC: OKDataLoadingVC {
     }
     
     
-    private func configure() {
-        view.addSubview(moviesCollectionView)
+    private func configureSubviews() {
+        view.addSubviews(moviesCollectionView)
         moviesCollectionView.pinToEdges(of: view, by: 5)
     }
     
     private func configureCollectionView() {
         moviesCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
         moviesCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseID)
-        moviesCollectionView.translatesAutoresizingMaskIntoConstraints = false
         moviesCollectionView.delegate         = self
-        moviesCollectionView.dataSource       = self
         moviesCollectionView.backgroundColor  = .clear
+        
+        getModel().flatMap { fetchModel -> Observable<[AllResults]> in
+            self.resultsArray.append(contentsOf: fetchModel.results)
+            return Observable.just(self.resultsArray)
+        }.bind(to: moviesCollectionView.rx.items(cellIdentifier: MovieCell.reuseID, cellType: MovieCell.self)) {
+            index, movies, cell in
+            cell.set(with: movies)
+        }.disposed(by: disposeBag)
+        
+        moviesCollectionView
+            .rx
+            .itemSelected
+            .subscribe(onNext: { [weak self ] (indexPath) in
+                guard let strongSelf = self else { return }
+                
+                let destinationVC       = ItemInfoVC()
+                destinationVC.result    = strongSelf.resultsArray[indexPath.row]
+                
+                strongSelf.present(destinationVC, animated: true, completion: nil)
+            }).disposed(by: disposeBag)
     }
     
-    func getItunes() {
-        showLoadingView()
-        NetworkManager.shared.fetch(from: URLStrings.movies) { (movies: FetchModel) in
-            self.dismissLoadingView()
-            self.resultsArray.append(contentsOf: movies.results)
-            self.updateUI()
-        }
-    }
-    
-    func updateUI() {
-        DispatchQueue.main.async {
-            self.moviesCollectionView.reloadData()
-        }
+    func getModel() -> Observable<FetchModel> {
+        return NetworkManager.shared.fetch2(from: URLStrings.movies)
     }
 }
 
@@ -62,25 +71,5 @@ extension MovieVC: UICollectionViewDelegateFlowLayout {
         let width   = view.frame.width - 10
         let height  = view.frame.height / 10
         return CGSize(width: width, height: height)
-    }
-}
-
-extension MovieVC: UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return resultsArray.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseID, for: indexPath) as! MovieCell
-        cell.set(with: resultsArray[indexPath.row])
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let destinationVC       = ItemInfoVC()
-        destinationVC.result    = resultsArray[indexPath.row]
-        
-        present(destinationVC, animated: true, completion: nil)
     }
 }

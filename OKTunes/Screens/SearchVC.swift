@@ -181,7 +181,6 @@ extension SearchVC: UITableViewDataSource, UITableViewDelegate {
             let remainingValue      = "&term=\(searchResult.artistName!.replaceSpaceWithPlus())"
             let urlString           = URLStrings.songByArtistName + remainingValue
             let destinationVC       = MusicVC()
-            destinationVC.pushedBySearchVC = true
             
             NetworkManager.shared.fetch(from: urlString) { (model: FetchModel) in
                 destinationVC.resultsArray.append(contentsOf: model.results)
