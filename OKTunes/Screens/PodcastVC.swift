@@ -59,7 +59,7 @@ class PodcastVC: OKDataLoadingVC {
     }
     
     func getModel() -> Observable<FetchModel> {
-        return NetworkManager.shared.fetch2(from: URLStrings.podcasts)
+        return NetworkManager.shared.fetch(from: URLStrings.podcasts)
     }
 }
 

@@ -16,20 +16,22 @@ class SearchVC: OKDataLoadingVC {
     var searchBar           = UISearchBar()
     
     var searchResultsArray  = [AllResults]()
-    let disposebag          = DisposeBag()
     
     var movieSelected       = false
     var urlString           = URLStrings.artistName
+    
+    let disposebag          = DisposeBag()
+    var dataSource          = BehaviorRelay(value: [AllResults]())
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
         configure()
         configureSegControl()
         configureTableView()
         configureSearchBar()
-        searchBarFunc()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,6 +60,7 @@ class SearchVC: OKDataLoadingVC {
         segmentedControl.backgroundColor        = .darkGray
         segmentedControl.layer.borderWidth      = 2
         segmentedControl.layer.borderColor      = UIColor.darkGray.cgColor
+        
         segmentedControl.addTarget(self, action: #selector(switchSegControl), for: .valueChanged)
     }
     
@@ -65,30 +68,34 @@ class SearchVC: OKDataLoadingVC {
         tableView.frame                 = view.bounds
         tableView.separatorStyle        = .none
         tableView.rowHeight             = 40
-        tableView.delegate              = self
-        tableView.dataSource            = self
         tableView.keyboardDismissMode   = .onDrag
         
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.reuseID)
+        
+        self.tableView
+            .rx
+            .itemSelected
+            .subscribe(onNext: { [weak self ] (indexPath) in
+                guard let strongSelf = self else { return }
+                strongSelf.rxCellTapped(on: indexPath)
+            }).disposed(by: disposebag)
     }
     
     private func configureSearchBar() {
         searchBar.sizeToFit()
-        searchBar.placeholder       = NSLocalizedString("search musics by artist name", comment: "")
-        searchBar.showsCancelButton = true
-        navigationItem.titleView    = searchBar
-    }
-    
-    func searchBarFunc() {
+        searchBar.placeholder           = NSLocalizedString("search musics by artist name", comment: "")
+        searchBar.showsCancelButton     = true
+        navigationItem.titleView        = searchBar
+        
         self.searchBar
             .rx
             .text
             .orEmpty
-            .throttle(.milliseconds(300), scheduler: MainScheduler.instance)
-            .filter { $0.count > 2 }
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
             .subscribe(onNext: { [weak self ](text) in
                 guard let strongSelf = self else { return }
-                strongSelf.searchItunes(text: text)
+                strongSelf.rxSearchCall(for: text)
             }).disposed(by: disposebag)
         
         self.searchBar
@@ -110,29 +117,70 @@ class SearchVC: OKDataLoadingVC {
                     strongSelf.tableView.reloadData()
                 }
             }).disposed(by: disposebag)
-    }
-    
-    func searchItunes(text: String) {
-        let remainingValue  = "&term=" + text.replaceSpaceWithPlus()
         
-        NetworkManager.shared.fetch(from: urlString + remainingValue) { (model: FetchModel) in
-            self.updateUI(with: model.results)
+        rxDataBinding()
+    }
+    
+    func rxSearchCall(for text: String) {
+        let remainingValue      = "&term=" + text.replaceSpaceWithPlus()
+        let urlString           = self.urlString + remainingValue
+        
+        getModel(from: urlString).flatMap { allResults -> Observable<[AllResults]> in
+            self.searchResultsArray = allResults.results
+            return Observable.just(allResults.results)
+        }.subscribe(onNext: { model in
+            self.dataSource.accept(model)
+
+        }).disposed(by: disposebag)
+    }
+    
+    func rxCellTapped(on indexPath: IndexPath) {
+        let searchResult            = searchResultsArray[indexPath.row]
+        
+        if movieSelected {
+            let destinationVC       = ItemInfoVC()
+            destinationVC.result    = searchResult
+            
+            self.present(destinationVC, animated: true, completion: nil)
+            
+        } else {
+            let remainingValue      = "&term=\(searchResult.artistName!.replaceSpaceWithPlus())"
+            let urlString           = URLStrings.songByArtistName + remainingValue
+            let destinationVC       = MusicVC()
+            
+            getModel(from: urlString).flatMap { fetchModel -> Observable<FetchModel> in
+                return Observable.just(fetchModel)
+            }.subscribe(onNext: { model in
+                destinationVC.resultsArray.append(contentsOf: model.results)
+                
+                DispatchQueue.main.async {
+                    self.present(destinationVC, animated: true, completion: nil)
+                }
+                
+            }).disposed(by: disposebag)
         }
     }
     
-    func updateUI(with resultsArray : [AllResults]) {
-        self.searchResultsArray.removeAll()
-        self.searchResultsArray.append(contentsOf: resultsArray)
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+    func rxDataBinding() {
+        dataSource.bind(to: tableView.rx.items(cellIdentifier: SearchTableViewCell.reuseID, cellType: SearchTableViewCell.self)) {
+            index, search, cell in
+            cell.selectionStyle = .none
+            
+            if self.movieSelected {
+                cell.set(with: search.trackName!)
+            } else {
+                cell.set(with: search.artistName!)
+            }
+            
+        }.disposed(by: disposebag)
+    }
+    
+    func getModel(from urlString: String) -> Observable<FetchModel> {
+        return NetworkManager.shared.fetch(from: urlString)
     }
     
     @objc func switchSegControl(sender: UISegmentedControl) {
-        searchResultsArray.removeAll()
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        dataSource.accept([])
         
         switch sender.selectedSegmentIndex {
         case 1:
@@ -145,50 +193,6 @@ class SearchVC: OKDataLoadingVC {
             searchBar.text          = ""
             urlString               = URLStrings.artistName
             movieSelected           = false
-        }
-    }
-}
-
-
-extension SearchVC: UITableViewDataSource, UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResultsArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell            = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.reuseID) as! SearchTableViewCell
-        cell.selectionStyle = .none
-        let searchResult    = searchResultsArray[indexPath.row]
-        
-        if movieSelected {
-            cell.set(with: searchResult.trackName!)
-        } else {
-            cell.set(with: searchResult.artistName!)
-        }
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let searchResult            = searchResultsArray[indexPath.row]
-        if movieSelected {
-            let destinationVC       = ItemInfoVC()
-            destinationVC.result    = searchResult
-            
-            view.window?.rootViewController?.present(destinationVC, animated: true, completion: nil)
-        } else {
-            let remainingValue      = "&term=\(searchResult.artistName!.replaceSpaceWithPlus())"
-            let urlString           = URLStrings.songByArtistName + remainingValue
-            let destinationVC       = MusicVC()
-            
-            NetworkManager.shared.fetch(from: urlString) { (model: FetchModel) in
-                destinationVC.resultsArray.append(contentsOf: model.results)
-                
-                DispatchQueue.main.async {
-                    self.view.window?.rootViewController?.present(destinationVC, animated: true, completion: nil)
-                }
-            }
         }
     }
 }

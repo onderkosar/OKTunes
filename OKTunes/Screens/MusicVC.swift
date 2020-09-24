@@ -63,7 +63,7 @@ class MusicVC: OKDataLoadingVC {
     }
     
     func getModel() -> Observable<FetchModel> {
-        return NetworkManager.shared.fetch2(from: URLStrings.musics)
+        return NetworkManager.shared.fetch(from: URLStrings.musics)
     }
 }
 
