@@ -48,6 +48,9 @@ class MusicVC: OKDataLoadingVC {
             return Observable.just(self.resultsArray)
         }.bind(to: musicsCollectionView.rx.items(cellIdentifier: MusicCell.reuseID, cellType: MusicCell.self)) {
             index, musics, cell in
+            cell.configurePlayBtnInsets()
+            cell.configure()
+            cell.configureElements()
             cell.set(with: musics, delegate: self)
         }.disposed(by: disposeBag)
         

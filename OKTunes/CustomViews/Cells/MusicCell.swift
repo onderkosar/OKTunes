@@ -44,7 +44,7 @@ class MusicCell: UICollectionViewCell {
         artworkImgView.downloadImage(fromURL: URL(string: result.artworkUrl100!)!)
     }
     
-    private func configure() {
+    func configure() {
         addSubviews(artworkImgView, trackLbl, albumLbl, artistLbl, playBtn, pauseBtn)
         
         let imgHeight: CGFloat  = contentView.frame.height - 5
@@ -73,7 +73,7 @@ class MusicCell: UICollectionViewCell {
         ])
     }
     
-    private func configureElements() {
+    func configureElements() {
         playBtn.addTarget(self, action: #selector(playBtnPressed), for: .touchUpInside)
         pauseBtn.addTarget(self, action: #selector(pauseBtnPressed), for: .touchUpInside)
         
@@ -86,7 +86,7 @@ class MusicCell: UICollectionViewCell {
         pauseBtn.isHidden   = true
     }
     
-    private func configurePlayBtnInsets() {
+    func configurePlayBtnInsets() {
         let btnInset        = frame.height - 30
         playBtn             = OKPlayButton(topInset: -btnInset, leftInset: -btnInset)
         pauseBtn            = OKPlayButton(topInset: -btnInset, leftInset: -btnInset)
