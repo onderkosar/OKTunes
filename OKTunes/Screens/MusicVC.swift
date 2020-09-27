@@ -34,13 +34,11 @@ class MusicVC: OKDataLoadingVC {
     
     private func configureSubviews() {
         view.addSubviews(musicsCollectionView)
-        musicsCollectionView.pinToEdges(of: view, by: 5)
     }
     
     private func configureCollectionView() {
-        musicsCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
+        musicsCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createFlowLayoutFor(columns: 1, in: view))
         musicsCollectionView.register(MusicCell.self, forCellWithReuseIdentifier: MusicCell.reuseID)
-        musicsCollectionView.delegate = self
         musicsCollectionView.backgroundColor  = .clear
         
         getModel().flatMap { fetchModel -> Observable<[AllResults]> in
@@ -70,13 +68,6 @@ class MusicVC: OKDataLoadingVC {
     }
 }
 
-extension MusicVC: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width   = view.frame.width - 10
-        let height  = view.frame.height / 10
-        return CGSize(width: width, height: height)
-    }
-}
 
 extension MusicVC: MusicPreviewDelegate {
     func playPreview(urlStr: String) {

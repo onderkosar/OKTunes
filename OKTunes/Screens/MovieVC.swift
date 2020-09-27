@@ -31,13 +31,11 @@ class MovieVC: OKDataLoadingVC {
     
     private func configureSubviews() {
         view.addSubviews(moviesCollectionView)
-        moviesCollectionView.pinToEdges(of: view, by: 5)
     }
     
     private func configureCollectionView() {
-        moviesCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
+        moviesCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createFlowLayoutFor(columns: 1, in: view))
         moviesCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseID)
-        moviesCollectionView.delegate         = self
         moviesCollectionView.backgroundColor  = .clear
         
         getModel().flatMap { fetchModel -> Observable<[AllResults]> in
@@ -63,13 +61,5 @@ class MovieVC: OKDataLoadingVC {
     
     func getModel() -> Observable<FetchModel> {
         return NetworkManager.shared.fetch(from: URLStrings.movies)
-    }
-}
-
-extension MovieVC: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width   = view.frame.width - 10
-        let height  = view.frame.height / 10
-        return CGSize(width: width, height: height)
     }
 }

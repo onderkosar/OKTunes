@@ -30,13 +30,11 @@ class PodcastVC: OKDataLoadingVC {
     
     private func configureSubviews() {
         view.addSubviews(podcastsCollectionView)
-        podcastsCollectionView.pinToEdges(of: view, by: 5)
     }
     
     private func configureCollectionView() {
-        podcastsCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
+        podcastsCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createFlowLayoutFor(columns: 1, in: view))
         podcastsCollectionView.register(PodcastCell.self, forCellWithReuseIdentifier: PodcastCell.reuseID)
-        podcastsCollectionView.delegate         = self
         podcastsCollectionView.backgroundColor  = .clear
         
         getModel().flatMap { fetchModel -> Observable<[AllResults]> in
@@ -60,13 +58,5 @@ class PodcastVC: OKDataLoadingVC {
     
     func getModel() -> Observable<FetchModel> {
         return NetworkManager.shared.fetch(from: URLStrings.podcasts)
-    }
-}
-
-extension PodcastVC: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width   = view.frame.width - 10
-        let height  = view.frame.height / 10
-        return CGSize(width: width, height: height)
     }
 }
